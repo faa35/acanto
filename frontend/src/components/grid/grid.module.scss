@@ -1,0 +1,44 @@
+.container {
+  max-width: 1300px;
+  position: relative;
+  margin: 140px auto 0 auto;
+  // padding-bottom: 30px;
+  // the space between the last card in your grid and the bottom of the page
+
+  @media (max-width: 1200px) {
+    max-width: 1000px;
+  }
+
+  @media (max-width: 799px) {
+    max-width: 575px;
+  }
+
+  @media (max-width: 374px) {
+    // max-width: 320px;
+  }
+}
+
+.itemGrab {
+  overflow: hidden;
+  border-radius: 24px;
+  user-select: none;
+
+  &:hover {
+    cursor: grab;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.item {
+  transition: 1.25s ease;
+
+  &:hover {
+    box-shadow: rgba(100, 100, 111, 0.1) 0px 5px 24px 0px;
+  }
+}
+// .text-marquee {
+//   margin-top: 50px; /* Adjust this value to control the space */
+// }
