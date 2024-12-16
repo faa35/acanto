@@ -1,19 +1,30 @@
-import { ReactNode } from "react"
-import { useTheme } from "next-themes"
+import { ReactNode, useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 const shineMaskImage = `
   radial-gradient(
     circle at 50% 150%,
     white,
     transparent
-  )`
+  )`;
 
 interface CardWrapperProps {
   children: ReactNode;
 }
 
 export default function CardWrapper({ children }: CardWrapperProps) {
-  const { resolvedTheme } = useTheme()
+  const { resolvedTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Ensures theme is mounted before rendering
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    // Fallback to avoid mismatch during hydration
+    return <div className="group w-full h-full relative overflow-hidden rounded-3xl p-px bg-white/60"></div>;
+  }
 
   return (
     <div className="group w-full h-full relative overflow-hidden rounded-3xl p-px dark:bg-white/10 bg-white/60">
@@ -48,14 +59,12 @@ export default function CardWrapper({ children }: CardWrapperProps) {
                 )`,
             }}
           />
-
           <div className="absolute inset-px rounded-3xl bg-zinc-950/70 transition-colors duration-300 group-hover:bg-black/75" />
         </>
       )}
       {resolvedTheme === "light" && (
         <>
           <div className="absolute inset-px rounded-3xl bg-white/5 transition-colors duration-300 group-hover:bg-white/70" />
-
           <div
             className="absolute inset-0"
             style={{
@@ -71,9 +80,7 @@ export default function CardWrapper({ children }: CardWrapperProps) {
         </>
       )}
 
-      <div className="relative h-full">
-        {children}
-      </div>
+      <div className="relative h-full">{children}</div>
     </div>
-  )
+  );
 }
