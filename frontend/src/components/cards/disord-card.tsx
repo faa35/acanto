@@ -33,7 +33,7 @@ const DiscordCard = () => {
   useEffect(() => {
     const fetchDiscordData = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8080/api/details");
+        const { data } = await axios.get("https://acanto7.onrender.com/api/details");
         const discordUserId = data.discordUserId;
 
         const response = await axios.get(
