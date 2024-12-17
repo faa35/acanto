@@ -17,7 +17,7 @@ const AiChatbot = () => {
 
   const fetchGeminiApiKey = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/details');
+      const response = await axios.get('https://acanto7.onrender.com/api/details');
       return response.data.geminiApiKey;
     } catch (error) {
       console.error('Error fetching API key:', error);
