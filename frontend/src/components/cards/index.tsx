@@ -11,7 +11,7 @@ export { default as ChatCard } from "./chat-card";
 export { default as NavBarCard } from "./navbar-card";
 export { default as Footer } from "./footer";
 // export { default as ProjectCard} from "./project-card";
-// export { default as AiChatButton} from "./aichat";
+export { default as AiChatButton} from "./aichat";
 
 
 export { default as AllianceDaoCard } from "./project-cards/alliance-dao-card";

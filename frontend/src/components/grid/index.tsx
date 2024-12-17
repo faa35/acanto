@@ -21,7 +21,7 @@ import {
 	ChatCard,
 	NavBarCard,
 	Footer,
-	// AiChatButton
+	AiChatButton
 } from "@/components/cards";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -41,7 +41,7 @@ const Grid = () => {
 			{/* Render the Navbar here */}
 			<NavBarCard />
 
-			{/* <AiChatButton /> */}
+			<AiChatButton />
 
 			<ResponsiveGridLayout
 				useCSSTransforms
