@@ -146,66 +146,66 @@ export const layouts = {
     sm: [ // 0px - 813px
       {
         i: "bio",
-        x: 0., y: 1, w: 5, h: 5,
+        x: 0., y: 0, w: 5, h: 5,
         isResizable: false,
       },
       {
         i: "theme-toggle",
-        x: 0, y: 6, w: 5, h: 2,
+        x: 0, y: 5, w: 5, h: 2,
         isResizable: false,
       },
       {
         i: "resume",
-        x:0, y:8, w: 3, h: 2.5,
+        x:0, y:7, w: 3, h: 2.5,
         isResizable: false,
       },
 
       {
         i: "github",
-        x:0, y: 10.5, w: 3, h: 3.5,
+        x:0, y: 9.5, w: 3, h: 3.5,
         isResizable: false,
       },
       
       {
         i: "chat-card",
-        x: 3, y: 8, w: 1, h: 6,
+        x: 3, y: 7, w: 1, h: 6,
         isResizable: false,
       },
       {
         i: "discord",
-        x: 0, y: 14, w: 4, h: 10,
+        x: 0, y: 13, w: 4, h: 10,
         isResizable: false,
       },
       {
         i: "lastfm",
-        x: 0, y: 24, w: 4, h: 11,
+        x: 0, y: 23, w: 4, h: 11,
         isResizable: false,
       },
       {
         i: "linkedin",
-        x: 1, y: 35, w: 3, h: 2.5,
+        x: 1, y: 34, w: 3, h: 2.5,
         isResizable: false,
       },
 
       {
         i: "email",
-        x: 1, y: 37.5, w: 3, h: 2.5,
+        x: 1, y: 36.5, w: 3, h: 2.5,
         isResizable: false,
       },
       {
         i: "codepen",
-        x: 1, y: 40, w: 3, h: 2.5,
+        x: 1, y: 39, w: 3, h: 2.5,
         isResizable: false,
       },
       
       {
         i: "chat-card-2",
-        x: 0, y: 35, w: 1, h: 7.5,
+        x: 0, y: 34, w: 1, h: 7.5,
         isResizable: false,
       },
       {
         i: "map",
-        x: 0, y: 42.5, w: 4, h: 5,
+        x: 0, y: 41.5, w: 4, h: 5,
         isResizable: false,
       },
 
