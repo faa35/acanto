@@ -156,19 +156,19 @@ export const layouts = {
       },
       {
         i: "resume",
-        x:0, y:7, w: 3, h: 2.5,
+        x:0, y:7, w: 2.5, h: 2.5,
         isResizable: false,
       },
 
       {
         i: "github",
-        x:0, y: 9.5, w: 3, h: 3.5,
+        x:0, y: 9.5, w: 2.5, h: 3.5,
         isResizable: false,
       },
       
       {
         i: "chat-card",
-        x: 3, y: 7, w: 1, h: 6,
+        x: 3, y: 7, w: 1.5, h: 6,
         isResizable: false,
       },
       {
@@ -183,24 +183,24 @@ export const layouts = {
       },
       {
         i: "linkedin",
-        x: 1, y: 34, w: 3, h: 2.5,
+        x: 1.5, y: 34, w: 2.5, h: 2.5,
         isResizable: false,
       },
 
       {
         i: "email",
-        x: 1, y: 36.5, w: 3, h: 2.5,
+        x: 1.5, y: 36.5, w: 2.5, h: 2.5,
         isResizable: false,
       },
       {
         i: "codepen",
-        x: 1, y: 39, w: 3, h: 2.5,
+        x: 1.5, y: 39, w: 2.5, h: 2.5,
         isResizable: false,
       },
       
       {
         i: "chat-card-2",
-        x: 0, y: 34, w: 1, h: 7.5,
+        x: 0, y: 34, w: 1.5, h: 7.5,
         isResizable: false,
       },
       {
