@@ -1,16 +1,22 @@
 "use client";
 
-import { FaComment, FaPaperPlane, FaTimes } from 'react-icons/fa';
 import React, { useState, useRef, useEffect } from 'react';
+import { FaPaperPlane, FaTimes } from 'react-icons/fa';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 
 // Dynamically import Lottie only on the client-side
 const LottiePlayer = dynamic(() => import('lottie-react'), { ssr: false });
 
-const AiChatbot = () => {
+type Message = {
+  text: string;
+  sender: 'user' | 'bot';
+  timestamp?: Date;
+};
+
+const AiChatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{ text: string; sender: 'user' | 'bot' }[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const chatContentRef = useRef<HTMLDivElement>(null);
@@ -49,12 +55,20 @@ const AiChatbot = () => {
   const handleSendMessage = async () => {
     if (inputMessage.trim() === '') return;
 
-    const userMessage = { text: inputMessage, sender: 'user' as const };
+    const userMessage: Message = { 
+      text: inputMessage, 
+      sender: 'user', 
+      timestamp: new Date() 
+    };
     setMessages(prev => [...prev, userMessage]);
     setInputMessage('');
     setIsLoading(true);
 
-    const botLoadingMessage = { text: 'Generating response...', sender: 'bot' as const };
+    const botLoadingMessage: Message = { 
+      text: 'Generating response...', 
+      sender: 'bot', 
+      timestamp: new Date() 
+    };
     setMessages(prev => [...prev, botLoadingMessage]);
 
     try {
@@ -63,7 +77,8 @@ const AiChatbot = () => {
         const updatedMessages = [...prev];
         updatedMessages[updatedMessages.length - 1] = { 
           text: generatedText, 
-          sender: 'bot' 
+          sender: 'bot',
+          timestamp: new Date()
         };
         return updatedMessages;
       });
@@ -72,7 +87,8 @@ const AiChatbot = () => {
         const updatedMessages = [...prev];
         updatedMessages[updatedMessages.length - 1] = { 
           text: 'Sorry, I could not generate a response.', 
-          sender: 'bot' 
+          sender: 'bot',
+          timestamp: new Date()
         };
         return updatedMessages;
       });
@@ -91,92 +107,69 @@ const AiChatbot = () => {
     <div>
       {/* Lottie Chat Icon */}
       <div
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          zIndex: 1000,
-          cursor: 'pointer',
-          transition: 'all 0.3s',
-        }}
+        className="fixed bottom-4 right-4 z-50 cursor-pointer transition-all duration-300 hover:scale-110"
         onClick={() => setIsOpen(!isOpen)}
       >
         <LottiePlayer 
           animationData={require('../../lottie/aichat/blep.json')} 
           loop 
-          style={{ width: '100px', height: '100px' }} 
+          className="w-24 h-24" 
         />
       </div>
 
       {/* Chat Container */}
       {isOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            bottom: '80px',
-            right: '20px',
-            width: '300px',
-            height: '400px',
-            backgroundColor: '#f9f9f9',
-            border: '1px solid #ddd',
-            borderRadius: '10px',
-            display: 'flex',
-            flexDirection: 'column',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-            zIndex: 1001,
-          }}
+        <div 
+          className="fixed bottom-20 right-4 w-80 h-[500px] bg-white dark:bg-gray-800 
+                     border border-gray-200 dark:border-gray-700 
+                     shadow-lg rounded-xl flex flex-col overflow-hidden 
+                     max-w-full max-h-[80vh] sm:w-96 z-50"
         >
           {/* Chat Header */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '10px',
-              borderBottom: '1px solid #ddd'
-            }}
+          <div 
+            className="flex flex-row justify-between items-center 
+                       border-b border-gray-200 dark:border-gray-700 p-4"
           >
-            <h3 style={{ margin: 0 }}>AI Chatbot</h3>
-            <FaTimes
+            <h3 className="text-lg font-semibold dark:text-white">AI Chatbot</h3>
+            <button 
               onClick={() => setIsOpen(false)}
-              style={{ cursor: 'pointer' }}
-            />
+              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white 
+                         transition-colors duration-200 rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <FaTimes />
+            </button>
           </div>
 
           {/* Chat Content */}
-          <div
+          <div 
             ref={chatContentRef}
-            style={{
-              flexGrow: 1,
-              overflowY: 'auto',
-              padding: '10px'
-            }}
+            className="flex-grow overflow-y-auto p-4 space-y-3 
+                       bg-gray-50 dark:bg-gray-900"
           >
             {messages.map((msg, index) => (
               <div
                 key={index}
-                style={{
-                  textAlign: msg.sender === 'user' ? 'right' : 'left',
-                  marginBottom: '10px',
-                  padding: '8px',
-                  borderRadius: '8px',
-                  backgroundColor: msg.sender === 'user' ? '#e6f2ff' : '#f0f0f0',
-                  maxWidth: '80%',
-                  alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
-                  display: 'inline-block'
-                }}
+                className={`flex w-full ${
+                  msg.sender === 'user' ? "justify-end" : "justify-start"
+                }`}
               >
-                {msg.text}
+                <div
+                  className={`max-w-[75%] p-3 rounded-lg ${
+                    msg.sender === 'user' 
+                      ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" 
+                      : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                  }`}
+                >
+                  {msg.text}
+                </div>
               </div>
             ))}
           </div>
 
           {/* Input Area */}
-          <div
-            style={{
-              display: 'flex',
-              padding: '10px',
-              borderTop: '1px solid #ddd'
-            }}
+          <div 
+            className="flex p-4 border-t border-gray-200 dark:border-gray-700 
+                       bg-white dark:bg-gray-800 space-x-2"
           >
             <input
               type="text"
@@ -184,26 +177,19 @@ const AiChatbot = () => {
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
               placeholder="Type a message..."
-              style={{
-                flexGrow: 1,
-                marginRight: '10px',
-                padding: '8px',
-                borderRadius: '5px',
-                border: '1px solid #ddd'
-              }}
               disabled={isLoading}
+              className="flex-grow p-2 border border-gray-300 dark:border-gray-600 
+                         rounded-md bg-white dark:bg-gray-700 
+                         text-gray-900 dark:text-white 
+                         placeholder-gray-500 dark:placeholder-gray-400"
             />
-            <button
+            <button 
               onClick={handleSendMessage}
-              disabled={isLoading}
-              style={{
-                backgroundColor: isLoading ? '#cccccc' : '#4CAF50',
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                padding: '8px 15px',
-                cursor: isLoading ? 'not-allowed' : 'pointer'
-              }}
+              disabled={isLoading || inputMessage.trim() === ''}
+              className="p-2 bg-blue-500 text-white rounded-md 
+                         hover:bg-blue-600 disabled:bg-gray-400 
+                         transition-colors duration-200 
+                         flex items-center justify-center"
             >
               <FaPaperPlane />
             </button>
