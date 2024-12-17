@@ -3,8 +3,10 @@
 import { FaComment, FaPaperPlane, FaTimes } from 'react-icons/fa';
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import Lottie from 'lottie-web';
-import animationData from '../../lottie/aichat/blep.json'; // Replace with your local JSON path
+import dynamic from 'next/dynamic';
+
+// Dynamically import Lottie only on the client-side
+const LottiePlayer = dynamic(() => import('lottie-react'), { ssr: false });
 
 const AiChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,8 +14,6 @@ const AiChatbot = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const chatContentRef = useRef<HTMLDivElement>(null);
-  const lottieContainerRef = useRef<HTMLDivElement>(null); // Ref for Lottie animation
-  const lottieInstance = useRef<any>(null); // To store Lottie instance for cleanup
 
   const fetchGeminiApiKey = async () => {
     try {
@@ -82,25 +82,6 @@ const AiChatbot = () => {
   };
 
   useEffect(() => {
-    if (lottieContainerRef.current) {
-      lottieInstance.current = Lottie.loadAnimation({
-        container: lottieContainerRef.current, // The div that will hold the animation
-        animationData, // Your Lottie JSON data
-        renderer: 'svg', // Rendering method
-        loop: true, // Whether the animation should loop
-        autoplay: true, // Whether the animation should start automatically
-      });
-    }
-
-    // Clean up animation on component unmount
-    return () => {
-      if (lottieInstance.current) {
-        lottieInstance.current.destroy();
-      }
-    };
-  }, []); // Only run once on mount and cleanup on unmount
-
-  useEffect(() => {
     if (chatContentRef.current) {
       chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
     }
@@ -113,15 +94,18 @@ const AiChatbot = () => {
         style={{
           position: 'fixed',
           bottom: '20px',
-          right: '20px', // Move the icon to the right
-          // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+          right: '20px',
           zIndex: 1000,
           cursor: 'pointer',
           transition: 'all 0.3s',
         }}
-        onClick={() => setIsOpen(!isOpen)} // Toggle chat window on click
+        onClick={() => setIsOpen(!isOpen)}
       >
-        <div ref={lottieContainerRef} style={{ width: '100px', height: '100px' }} /> {/* Lottie container with bigger size */}
+        <LottiePlayer 
+          animationData={require('../../lottie/aichat/blep.json')} 
+          loop 
+          style={{ width: '100px', height: '100px' }} 
+        />
       </div>
 
       {/* Chat Container */}
@@ -130,7 +114,7 @@ const AiChatbot = () => {
           style={{
             position: 'fixed',
             bottom: '80px',
-            right: '20px', // Move the chat window to the right
+            right: '20px',
             width: '300px',
             height: '400px',
             backgroundColor: '#f9f9f9',
@@ -173,7 +157,12 @@ const AiChatbot = () => {
                 style={{
                   textAlign: msg.sender === 'user' ? 'right' : 'left',
                   marginBottom: '10px',
-                  color: msg.sender === 'user' ? 'blue' : 'green'
+                  padding: '8px',
+                  borderRadius: '8px',
+                  backgroundColor: msg.sender === 'user' ? '#e6f2ff' : '#f0f0f0',
+                  maxWidth: '80%',
+                  alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
+                  display: 'inline-block'
                 }}
               >
                 {msg.text}
@@ -208,7 +197,7 @@ const AiChatbot = () => {
               onClick={handleSendMessage}
               disabled={isLoading}
               style={{
-                backgroundColor: '#4CAF50',
+                backgroundColor: isLoading ? '#cccccc' : '#4CAF50',
                 color: 'white',
                 border: 'none',
                 borderRadius: '5px',
