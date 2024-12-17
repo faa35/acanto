@@ -183,24 +183,24 @@ export const layouts = {
       },
       {
         i: "linkedin",
-        x: 1.5, y: 34, w: 2.5, h: 2.5,
+        x: 1.7, y: 34, w: 2.3, h: 2.5,
         isResizable: false,
       },
 
       {
         i: "email",
-        x: 1.5, y: 36.5, w: 2.5, h: 2.5,
+        x: 1.7, y: 36.5, w: 2.3, h: 2.5,
         isResizable: false,
       },
       {
         i: "codepen",
-        x: 1.5, y: 39, w: 2.5, h: 2.5,
+        x: 1.7, y: 39, w: 2.3, h: 2.5,
         isResizable: false,
       },
       
       {
         i: "chat-card-2",
-        x: 0, y: 34, w: 1.5, h: 7.5,
+        x: 0, y: 34, w: 1.7, h: 7.5,
         isResizable: false,
       },
       {
