@@ -63,7 +63,7 @@ const LastfmCard = () => {
           <img
             src={songData.albumArtUrl || "/default-album-art.jpg"}
             alt="Track Cover"
-            className={`ml-[-5px] w-64 h-64 lg:w-80 lg:h-80 rounded-3xl border border-gray-700 
+            className={`ml-[-15px] w-64 h-64 lg:w-80 lg:h-80 rounded-3xl border border-gray-700 
   ${resolvedTheme === "dark" ? "grayscale-0" : "grayscale"} 
   hover:grayscale-0 transition-all duration-300`}
           />
