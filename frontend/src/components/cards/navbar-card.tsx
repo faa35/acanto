@@ -1,23 +1,18 @@
-
-// D:\Fall 24\my website\personalweb\frontend\src\components\cards\navbar-card.tsx
 import Link from "next/link";
-import { usePathname } from 'next/navigation';  // Import usePathname to detect current route
+import { usePathname } from "next/navigation";
 
 const NavBarCard = () => {
-  const pathname = usePathname();  // Get the current path
+  const pathname = usePathname();
 
   return (
     <div className="navbar-container">
       <div className="navbar flex justify-end items-center px-6 py-4">
-        <button className={`nav-button ${pathname === '/' ? 'active' : ''}`}>
-          <Link href="/">Home</Link> {/* Home Button */}
+        <button className={`nav-button ${pathname === "/" ? "active" : ""}`}>
+          <Link href="/">Home</Link>
         </button>
-        <button className={`nav-button ${pathname === '/projects' ? 'active' : ''}`}>
-          <Link href="/projects">Projects</Link> {/* Projects Button */}
+        <button className={`nav-button ${pathname === "/projects" ? "active" : ""}`}>
+          <Link href="/projects">Projects</Link>
         </button>
-        {/* <button className={`nav-button ${pathname === '/blog' ? 'active' : ''}`}>
-          <Link href="/blog">Blog</Link> 
-        </button> */}
       </div>
       <style jsx>{`
         .navbar-container {
@@ -25,16 +20,16 @@ const NavBarCard = () => {
           top: 0;
           left: 0;
           width: 100%;
-          z-index: 999;  /* Ensure the navbar is on top */
-          background: rgba(3, 4, 3, 0.9); /* Slightly opaque white background */
-          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Optional shadow */
+          z-index: 999;
+          backdrop-filter: blur(100px);
+          -webkit-backdrop-filter: blur(100px);
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
         }
         .navbar {
           display: flex;
-          justify-content: flex-end; /* Align the buttons to the right */
+          justify-content: flex-end;
           align-items: center;
-          padding: 12px 320px; /* nav button positioninggg */
-          
+          padding: 12px 320px;
         }
         .nav-button {
           position: relative;
@@ -46,23 +41,34 @@ const NavBarCard = () => {
           border: none;
           cursor: pointer;
           border-radius: 4px;
-          transition: color 0.3s ease, border-bottom 0.3s ease;
-          margin-left: 16px; /* Add space between the buttons */
+          transition: color 0.3s ease;
+          margin-left: 16px;
         }
         .nav-button.active {
-          color: #fff; /* Blue color for active link */
+          color: #fff;
         }
         .nav-button.active::after {
-          content: '';
+          content: "";
           position: absolute;
-          bottom: 0;
+          bottom: -4px; /* Slightly lower for distinction */
           left: 0;
-          width: 100%;
-          height: 2px;
-          background-color: #fff; /* Blue line under the active button */
+          width: 100%; /* Full width */
+          height: 4px; /* Wider line for active state */
+          background-color: #fff;
         }
-        .nav-button:hover {
-          background: #444;
+        .nav-button::after {
+          content: "";
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: #fff;
+          transition: width 0.3s ease, height 0.3s ease;
+        }
+        .nav-button:hover::after {
+          width: 100%;
+          height: 2px; /* Hover line remains thinner */
         }
       `}</style>
     </div>
@@ -70,4 +76,3 @@ const NavBarCard = () => {
 };
 
 export default NavBarCard;
-

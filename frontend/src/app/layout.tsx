@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         url: "https://www.joshuabrigati.com/Screenshot.png",
         width: 3410,
         height: 2072,
-        alt: "Joshua Brigati - Portfolio",
+        alt: "Fardin Abdulla - Portfolio",
       },
     ],
   },
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${silka.className}`}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>    {/* defaultTheme="dark" enableSystem={true} */}
           <div style={{
             flex: "none",
             height: "100%",
