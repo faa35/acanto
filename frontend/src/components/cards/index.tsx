@@ -19,5 +19,5 @@ export { default as AllianceLandingCard } from "./project-cards/alliance-landing
 export { default as DeveloperLandingCard } from "./project-cards/developer-landing-card";
 export { default as StationLandingCard } from "./project-cards/station-landing-card";
 export { default as StationSetupCard } from "./project-cards/station-setup-card";
-
+export { default as StationUiCard } from "./project-cards/station-ui-card";
 

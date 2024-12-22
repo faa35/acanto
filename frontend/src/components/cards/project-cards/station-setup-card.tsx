@@ -10,7 +10,7 @@ const StationSetup = () => {
         <div className="relative flex justify-between w-full h-full items-stretch flex-col">
           <div className="absolute h-full w-full aspect-[578/433] shadow-2xl rounded-lg">
             <Image
-              src={"/projects/Station-Setup.png"}
+              src={"/projects/JG.jpg"}
               alt={"Station landing page example"}
               fill
               style={{
@@ -36,26 +36,36 @@ const StationSetup = () => {
           </h4>
           <div className="w-full flex gap-2 items-center">
             <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
-              Station Setup Page
+              Journey Genie
             </h1>
-            <SendmessageIcon link="https://setup-station.terra.money/" lottieName="StationSetupIcon" />
+            <SendmessageIcon link="https://github.com/faa35/journey-genie" lottieName="StationSetupIcon" />
           </div>
           <div className="flex gap-2 flex-wrap mt-1">
             <Badge variant="default" className="text-xs">
-              Solo Developer
+              Group project
             </Badge>
             <Badge variant="default" className="text-xs">
-              Nextjs
+              HTML
             </Badge>
             <Badge variant="default" className="text-xs">
-              Javascript
+              Bootstrap
             </Badge>
             <Badge variant="default" className="text-xs">
-              Figma
+              JS
             </Badge>
             <Badge variant="default" className="text-xs">
-              SCSS
+              PostgreSQL
             </Badge>
+            <Badge variant="default" className="text-xs">
+              Java Spring Boot
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              MockMvc, JUnit
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              Docker
+            </Badge>
+
           </div>
         </div>
       </div>

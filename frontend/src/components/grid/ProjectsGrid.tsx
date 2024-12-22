@@ -18,7 +18,9 @@ import {
 	AllianceLandingCard,
 	StationLandingCard,
 	DeveloperLandingCard,
+	StationUiCard,
 	Footer,
+
 } from "@/components/cards";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -138,6 +140,17 @@ const Grid = () => {
         >
 					<BlurFade delay={0.75}>
 						<DeveloperLandingCard />
+					</BlurFade>
+				</div>
+				<div
+					key="station-ui"
+					className={cn(styles.itemGrab, styles.item)}
+					style={{
+						transitionDuration: isMounted ? "700ms" : "0ms"
+					}}
+        >
+					<BlurFade delay={0.75}>
+						<StationUiCard />
 					</BlurFade>
 				</div>
 

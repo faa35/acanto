@@ -10,7 +10,7 @@ const DeveloperLanding = () => {
         <div className="relative flex justify-between w-full h-full items-stretch flex-col">
           <div className="absolute h-full w-full aspect-[578/433] shadow-2xl rounded-lg">
             <Image
-              src={"/projects/Developer-landing.png"}
+              src={"/projects/portfolio.png"}
               alt={"Developer landing page example"}
               fill
               style={{
@@ -36,22 +36,31 @@ const DeveloperLanding = () => {
             </h4>
             <div className="w-full flex gap-2 items-center">
               <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
-                Developer Page for Terra
+                Personal Portfolio
               </h1>
-              <SendmessageIcon link="https://developers.terra.money/" lottieName="DeveloperLandingIcon" />
+              <SendmessageIcon link="https://github.com/faa35/acanto" lottieName="DeveloperLandingIcon" />
             </div>
             <div className="flex gap-2 flex-wrap mt-1">
               <Badge variant="default" className="text-xs">
-                Frontend + Design
+                React
               </Badge>
               <Badge variant="default" className="text-xs">
-                React
+                Next.js
               </Badge>
               <Badge variant="default" className="text-xs">
                 Typescript
               </Badge>
               <Badge variant="default" className="text-xs">
-                SCSS
+                Tailwind CSS
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                Java Spring boot
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                Vercel + Render
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                3 APIs
               </Badge>
             </div>
           </div>

@@ -10,7 +10,7 @@ const StationLanding = () => {
         <div className="relative flex justify-between w-full h-full items-stretch flex-col">
           <div className="absolute h-full w-full aspect-[578/433] shadow-2xl">
             <Image
-              src={"/projects/Station-money.png"}
+              src={"/projects/JGv2.png"}
               alt={"Station landing page example"}
               fill
               style={{
@@ -36,25 +36,37 @@ const StationLanding = () => {
           </h4>
           <div className="w-full flex gap-2 items-center">
             <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
-              Station Landing Page
+              Journey Genie v2
             </h1>
-            <SendmessageIcon link="https://station.money/" lottieName="StationLandingIcon" />
+            <SendmessageIcon link="https://github.com/faa35/journey-genie-v2" lottieName="StationLandingIcon" />
           </div>
           <div className="flex gap-2 flex-wrap mt-1">
             <Badge variant="default" className="text-xs">
               Solo Developer
             </Badge>
             <Badge variant="default" className="text-xs">
-              Nextjs
+              HTML
             </Badge>
             <Badge variant="default" className="text-xs">
-              Typescript
+              CSS
             </Badge>
             <Badge variant="default" className="text-xs">
-              Figma
+              JS
             </Badge>
             <Badge variant="default" className="text-xs">
-              SCSS
+              Gemini AI 1.5 flash
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              PostgreSQL
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              Java Spring Boot
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              MockMvc, JUnit
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              Docker
             </Badge>
           </div>
         </div>

@@ -10,7 +10,7 @@ const AllianceDao = () => {
         <div className="relative flex justify-between w-full h-full items-stretch flex-col">
           <div className="absolute h-full w-full aspect-[578/451] shadow-2xl rounded-lg">
             <Image
-              src={"/projects/Alliance-dao.png"}
+              src={"/projects/ML_NN.png"}
               alt={"Station landing page example"}
               fill
               style={{
@@ -36,25 +36,28 @@ const AllianceDao = () => {
             </h4>
             <div className="w-full flex gap-2 items-center">
               <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
-                Alliance Dao NFT Site
+               Machine Learning Neural Network
               </h1>
-              <SendmessageIcon link="https://dao.alliance.money/" lottieName="AllianceDaoIcon" />
+              <SendmessageIcon link="https://github.com/faa35/A4-AI" lottieName="AllianceDaoIcon" />
             </div>
             <div className="flex gap-2 flex-wrap mt-1">
               <Badge variant="default" className="text-xs">
-                Frontend
+                Python
               </Badge>
               <Badge variant="default" className="text-xs">
-                React
+                Naïve Bayes
               </Badge>
               <Badge variant="default" className="text-xs">
-                Typescript
+                Perceptron
               </Badge>
               <Badge variant="default" className="text-xs">
-                Figma
+                Non-linear Regression
               </Badge>
               <Badge variant="default" className="text-xs">
-                SCSS
+                Handwritten Digit Classification
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                Language Identification
               </Badge>
             </div>
           </div>

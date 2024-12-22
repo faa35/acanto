@@ -10,7 +10,7 @@ const AllianceLanding = () => {
         <div className="relative flex justify-between w-full h-full items-stretch flex-col">
           <div className="absolute h-full w-full aspect-[578/433] shadow-2xl rounded-lg">
             <Image
-              src={"/projects/Alliance-money.png"}
+              src={"/projects/FB.png"}
               alt={"Alliance landing page example"}
               fill
               style={{
@@ -36,22 +36,29 @@ const AllianceLanding = () => {
             </h4>
             <div className="w-full flex gap-2 items-center">
               <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
-                Alliance Landing
+                FriendsBook - Social Network
+                {/* netwoeking Platform  */}
               </h1>
-              <SendmessageIcon link="https://alliance.money/" lottieName="AllianceLandingIcon" />
+              <SendmessageIcon link="https://github.com/faa35/CMPT-225-A1" lottieName="AllianceLandingIcon" />
             </div>
             <div className="flex gap-2 flex-wrap mt-1">
               <Badge variant="default" className="text-xs">
-                Frontend + Design
+                C++
               </Badge>
               <Badge variant="default" className="text-xs">
-                React
+                Linux Terminal
               </Badge>
               <Badge variant="default" className="text-xs">
-                Typescript
+                Ubuntu(WSL)
               </Badge>
               <Badge variant="default" className="text-xs">
-                SCSS
+                OOP
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                DSA
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                Unit testing
               </Badge>
             </div>
           </div>
