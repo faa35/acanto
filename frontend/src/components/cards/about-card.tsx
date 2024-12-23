@@ -22,8 +22,8 @@ const AboutCard = () => {
         </div>
 
         <p className="dark:text-white text-slate-900 tracking-wide leading-6 text-xs sm:text-sm">
-          I am passionate about building beautiful and functional user interfaces.<br />
-          Currently work at TFL on the Station team.
+          I am passionate about full-stack development, artificial intelligence, and data science. <br />
+          Currently pursuing my Bachelor's degree in CS at Simon Fraser University.
         </p>
       </div>
     </CardWrapper>
