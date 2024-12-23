@@ -20,6 +20,7 @@ import {
 	Portfolio_Card,
 	Hashmap_Card,
 	Footer,
+	AiChatButton,
 
 } from "@/components/cards";
 
@@ -38,6 +39,7 @@ const Grid = () => {
 	return (
 		<div className={styles.container}>
 			<NavBarCard />
+			<AiChatButton />
 			<ResponsiveGridLayout
 				useCSSTransforms
 				className={styles.layout}

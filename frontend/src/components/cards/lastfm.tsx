@@ -85,9 +85,13 @@ const LastfmCard = () => {
         </div>
 
         {/* External Link Button using SendmessageIcon */}
-        <div
+        {/* <div
           className="absolute bottom-4 right-4 flex items-center justify-center p-1 rounded-full transition-all duration-300
             bg-yellow-400 text-black hover:ring-2 hover:ring-yellow-500"
+        > */}
+        <div
+          className="absolute bottom-4 right-4 flex items-center justify-center p-1 rounded-full transition-all duration-300
+            "
         >
           <SendmessageIcon
             link={`https://www.last.fm/user/${lastFmDetails.lastFmUsername}`}
