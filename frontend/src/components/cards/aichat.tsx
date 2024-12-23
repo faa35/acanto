@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FaPaperPlane, FaTimes } from 'react-icons/fa';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
+import SendChat from "../lottie-ui/send-message"; // Import SendmessageIcon
 
 // Dynamically import Lottie only on the client-side
 const LottiePlayer = dynamic(() => import('lottie-react'), { ssr: false });
@@ -168,7 +169,7 @@ const AiChatbot: React.FC = () => {
 
           {/* Input Area */}
           <div 
-            className="flex p-4 border-t border-gray-200 dark:border-gray-700 
+            className="flex p-3 border-t border-gray-200 dark:border-gray-700 
                        bg-white dark:bg-gray-800 space-x-2"
           >
             <input
@@ -179,19 +180,21 @@ const AiChatbot: React.FC = () => {
               placeholder="Type a message..."
               disabled={isLoading}
               className="flex-grow p-2 border border-gray-300 dark:border-gray-600 
-                         rounded-md bg-white dark:bg-gray-700 
+                         rounded-full bg-white dark:bg-gray-700 
                          text-gray-900 dark:text-white 
                          placeholder-gray-500 dark:placeholder-gray-400"
             />
             <button 
               onClick={handleSendMessage}
               disabled={isLoading || inputMessage.trim() === ''}
-              className="p-2 bg-blue-500 text-white rounded-md 
+              className=" bg-blue-500 text-white rounded-full 
                          hover:bg-blue-600 disabled:bg-gray-400 
                          transition-colors duration-200 
                          flex items-center justify-center"
             >
-              <FaPaperPlane />
+              <SendChat
+              lottieName="SendChat" // Lottie animation for the icon
+            />
             </button>
           </div>
         </div>
