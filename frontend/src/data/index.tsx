@@ -221,7 +221,7 @@ export const layouts = {
       //   isResizable: false,
       // },
       {
-        i: "station-landing",
+        i: "journey-geniev2",
         x: 0, y: 0, w: 6, h: 7,
         isResizable: false,
       },
@@ -231,27 +231,27 @@ export const layouts = {
         isResizable: false,
       },
       {
-        i: "alliance-dao",
+        i: "ml-nn",
         x: 6, y: 1, w: 6, h: 7,
         isResizable: false,
       },
       {
-        i: "station-setup",
+        i: "journey-genie",
         x: 0, y: 7, w: 6, h: 7,
         isResizable: false,
       },
       {
-        i: "alliance-landing",
+        i: "friendsbook",
         x: 6, y: 8, w: 6, h: 7,
         isResizable: false,
       },
       {
-        i: "developer-landing",
+        i: "portfolio",
         x: 0, y: 13, w: 6, h: 7,
         isResizable: false,
       },
       {
-        i: "station-ui",
+        i: "hashmap",
         x: 6, y: 15, w: 6, h: 7,
         isResizable: false,
       },
@@ -264,32 +264,36 @@ export const layouts = {
         isResizable: false,
       },
       {
-        i: "station-landing",
+        i: "journey-geniev2",
         x: 0, y: 2, w: 12, h: 12,
         isResizable: false,
       },
 
       {
-        i: "alliance-dao",
+        i: "ml-nn",
         x: 0, y:14, w: 12, h: 12,
         isResizable: false,
       },
       {
-        i: "station-setup",
+        i: "journey-genie",
         x: 0, y: 26, w: 12, h: 12,
         isResizable: false,
       },
       {
-        i: "alliance-landing",
+        i: "friendsbook",
         x: 0, y: 38, w: 12, h: 12,
         isResizable: false,
       },
       {
-        i: "developer-landing",
+        i: "portfolio",
         x: 0, y: 40, w: 12, h: 12,
         isResizable: false,
       },
-
+      {
+        i: "hashmap",
+        x: 6, y: 15, w: 6, h: 7,
+        isResizable: false,
+      },
 
     ],
     sm: [ // 0px - 813px
@@ -299,32 +303,36 @@ export const layouts = {
         isResizable: false,
       },
       {
-        i: "station-landing",
+        i: "journey-geniev2",
         x: 0, y: 2, w: 5, h: 11,
         isResizable: false,
       },
 
       {
-        i: "alliance-dao",
+        i: "ml-nn",
         x: 0, y:13, w: 5, h: 11,
         isResizable: false,
       },
       {
-        i: "station-setup",
+        i: "journey-genie",
         x: 0, y: 24, w: 5, h: 11,
         isResizable: false,
       },
       {
-        i: "alliance-landing",
+        i: "friendsbook",
         x: 0, y: 35, w: 5, h: 11,
         isResizable: false,
       },
       {
-        i: "developer-landing",
+        i: "portfolio",
         x: 0, y: 46, w: 5, h: 11,
         isResizable: false,
       },
-
+      {
+        i: "hashmap",
+        x: 6, y: 15, w: 6, h: 7,
+        isResizable: false,
+      },
 
     ],
 

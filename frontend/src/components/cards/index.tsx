@@ -14,10 +14,10 @@ export { default as Footer } from "./footer";
 export { default as AiChatButton} from "./aichat";
 
 
-export { default as AllianceDaoCard } from "./project-cards/alliance-dao-card";
-export { default as AllianceLandingCard } from "./project-cards/alliance-landing-card";
-export { default as DeveloperLandingCard } from "./project-cards/developer-landing-card";
-export { default as StationLandingCard } from "./project-cards/station-landing-card";
-export { default as StationSetupCard } from "./project-cards/station-setup-card";
-export { default as StationUiCard } from "./project-cards/station-ui-card";
+export { default as ML_NN_Card } from "./project-cards/ml_nn-card";
+export { default as FriendsBook_Card } from "./project-cards/friendsbook-card";
+export { default as Portfolio_Card } from "./project-cards/portfolio-card";
+export { default as JourneyGeniev2_Card } from "./project-cards/journey_genie_v2-card";
+export { default as JourneyGenie_Card } from "./project-cards/journey_genie-card";
+export { default as Hashmap_Card } from "./project-cards/hashmap-card";
 

@@ -1,16 +1,16 @@
-import Image from "next/image"
+import Image from "next/image";
 import { Badge } from "../../shadcn/Badge";
-import CardWrapper from "../card-wrapper";
 import SendmessageIcon from "../../lottie-ui/send-message";
+import CardWrapper from "../card-wrapper";
 
-const StationUI = () => {
+const JourneyGenie = () => {
   return (
     <CardWrapper>
       <div className="relative h-full flex flex-col justify-center gap-6 py-4 sm:py-6 px-4 sm:px-8 overflow-hidden">
         <div className="relative flex justify-between w-full h-full items-stretch flex-col">
           <div className="absolute h-full w-full aspect-[578/433] shadow-2xl rounded-lg">
             <Image
-              src={"/projects/hashtable.png"}
+              src={"/projects/JG.jpg"}
               alt={"Station landing page example"}
               fill
               style={{
@@ -36,35 +36,35 @@ const StationUI = () => {
           </h4>
           <div className="w-full flex gap-2 items-center">
             <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
-              Collision-Resistant Hashmap
+              Journey Genie
             </h1>
-            <SendmessageIcon link="https://github.com/faa35/CMPT-225-A5" lottieName="StationSetupIcon" />
+            <SendmessageIcon link="https://github.com/faa35/journey-genie" lottieName="StationSetupIcon" />
           </div>
           <div className="flex gap-2 flex-wrap mt-1">
             <Badge variant="default" className="text-xs">
               Group project
             </Badge>
             <Badge variant="default" className="text-xs">
-              C++
+              HTML
             </Badge>
             <Badge variant="default" className="text-xs">
-              Linear Probing
+              Bootstrap
             </Badge>
             <Badge variant="default" className="text-xs">
-                Linux Terminal
-              </Badge>
-              <Badge variant="default" className="text-xs">
-                Ubuntu(WSL)
-              </Badge>
-              <Badge variant="default" className="text-xs">
-                OOP
-              </Badge>
-              <Badge variant="default" className="text-xs">
-                DSA
-              </Badge>
-              <Badge variant="default" className="text-xs">
-                Unit testing
-              </Badge>
+              JS
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              PostgreSQL
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              Java Spring Boot
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              MockMvc, JUnit
+            </Badge>
+            <Badge variant="default" className="text-xs">
+              Docker
+            </Badge>
 
           </div>
         </div>
@@ -73,5 +73,4 @@ const StationUI = () => {
   )
 }
 
-export default StationUI
-
+export default JourneyGenie

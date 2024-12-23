@@ -3,15 +3,15 @@ import { Badge } from "../../shadcn/Badge";
 import SendmessageIcon from "../../lottie-ui/send-message";
 import CardWrapper from "../card-wrapper";
 
-const AllianceLanding = () => {
+const Portfolio = () => {
   return (
     <CardWrapper>
       <div className="relative h-full flex flex-col justify-center gap-6 py-4 sm:py-6 px-4 sm:px-8 overflow-hidden">
         <div className="relative flex justify-between w-full h-full items-stretch flex-col">
           <div className="absolute h-full w-full aspect-[578/433] shadow-2xl rounded-lg">
             <Image
-              src={"/projects/FB.png"}
-              alt={"Alliance landing page example"}
+              src={"/projects/portfolio.png"}
+              alt={"Developer landing page example"}
               fill
               style={{
                 objectFit: "cover",
@@ -36,29 +36,31 @@ const AllianceLanding = () => {
             </h4>
             <div className="w-full flex gap-2 items-center">
               <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
-                FriendsBook - Social Network
-                {/* netwoeking Platform  */}
+                Personal Portfolio
               </h1>
-              <SendmessageIcon link="https://github.com/faa35/CMPT-225-A1" lottieName="AllianceLandingIcon" />
+              <SendmessageIcon link="https://github.com/faa35/acanto" lottieName="DeveloperLandingIcon" />
             </div>
             <div className="flex gap-2 flex-wrap mt-1">
               <Badge variant="default" className="text-xs">
-                C++
+                React
               </Badge>
               <Badge variant="default" className="text-xs">
-                Linux Terminal
+                Next.js
               </Badge>
               <Badge variant="default" className="text-xs">
-                Ubuntu(WSL)
+                Typescript
               </Badge>
               <Badge variant="default" className="text-xs">
-                OOP
+                Tailwind CSS
               </Badge>
               <Badge variant="default" className="text-xs">
-                DSA
+                Java Spring boot
               </Badge>
               <Badge variant="default" className="text-xs">
-                Unit testing
+                Vercel + Render
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                3 APIs
               </Badge>
             </div>
           </div>
@@ -67,4 +69,4 @@ const AllianceLanding = () => {
   )
 }
 
-export default AllianceLanding
+export default Portfolio

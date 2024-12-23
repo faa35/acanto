@@ -3,7 +3,7 @@ import { Badge } from "../../shadcn/Badge";
 import SendmessageIcon from "../../lottie-ui/send-message";
 import CardWrapper from "../card-wrapper";
 
-const StationLanding = () => {
+const JourneyGeniev2 = () => {
   return (
     <CardWrapper>
       <div className="relative h-full flex flex-col justify-center gap-6 py-4 sm:py-6 px-4 sm:px-8 overflow-hidden">
@@ -75,4 +75,4 @@ const StationLanding = () => {
   )
 }
 
-export default StationLanding
+export default JourneyGeniev2

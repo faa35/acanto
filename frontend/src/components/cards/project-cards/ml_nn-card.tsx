@@ -1,9 +1,12 @@
+// alliance-dao-card.tsx to ml_nn-card.tsx:
+
+
 import Image from "next/image"
 import { Badge } from "../../shadcn/Badge";
 import SendmessageIcon from "../../lottie-ui/send-message";
 import CardWrapper from "../card-wrapper";
 
-const AllianceDao = () => {
+const ML_NN = () => {
   return (
     <CardWrapper>
       <div className="relative h-full flex flex-col justify-center gap-6 py-4 sm:py-6 px-4 sm:px-8 overflow-hidden">
@@ -11,7 +14,7 @@ const AllianceDao = () => {
           <div className="absolute h-full w-full aspect-[578/451] shadow-2xl rounded-lg">
             <Image
               src={"/projects/ML_NN.png"}
-              alt={"Station landing page example"}
+              alt={"Machine Learning Neural Network example"}
               fill
               style={{
                 objectFit: "cover",
@@ -66,4 +69,4 @@ const AllianceDao = () => {
   )
 }
 
-export default AllianceDao
+export default ML_NN

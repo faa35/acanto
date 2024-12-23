@@ -3,15 +3,15 @@ import { Badge } from "../../shadcn/Badge";
 import SendmessageIcon from "../../lottie-ui/send-message";
 import CardWrapper from "../card-wrapper";
 
-const DeveloperLanding = () => {
+const FriendsBook = () => {
   return (
     <CardWrapper>
       <div className="relative h-full flex flex-col justify-center gap-6 py-4 sm:py-6 px-4 sm:px-8 overflow-hidden">
         <div className="relative flex justify-between w-full h-full items-stretch flex-col">
           <div className="absolute h-full w-full aspect-[578/433] shadow-2xl rounded-lg">
             <Image
-              src={"/projects/portfolio.png"}
-              alt={"Developer landing page example"}
+              src={"/projects/FB.png"}
+              alt={"Alliance landing page example"}
               fill
               style={{
                 objectFit: "cover",
@@ -36,31 +36,29 @@ const DeveloperLanding = () => {
             </h4>
             <div className="w-full flex gap-2 items-center">
               <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
-                Personal Portfolio
+                FriendsBook - Social Network
+                {/* netwoeking Platform  */}
               </h1>
-              <SendmessageIcon link="https://github.com/faa35/acanto" lottieName="DeveloperLandingIcon" />
+              <SendmessageIcon link="https://github.com/faa35/CMPT-225-A1" lottieName="AllianceLandingIcon" />
             </div>
             <div className="flex gap-2 flex-wrap mt-1">
               <Badge variant="default" className="text-xs">
-                React
+                C++
               </Badge>
               <Badge variant="default" className="text-xs">
-                Next.js
+                Linux Terminal
               </Badge>
               <Badge variant="default" className="text-xs">
-                Typescript
+                Ubuntu(WSL)
               </Badge>
               <Badge variant="default" className="text-xs">
-                Tailwind CSS
+                OOP
               </Badge>
               <Badge variant="default" className="text-xs">
-                Java Spring boot
+                DSA
               </Badge>
               <Badge variant="default" className="text-xs">
-                Vercel + Render
-              </Badge>
-              <Badge variant="default" className="text-xs">
-                3 APIs
+                Unit testing
               </Badge>
             </div>
           </div>
@@ -69,4 +67,4 @@ const DeveloperLanding = () => {
   )
 }
 
-export default DeveloperLanding
+export default FriendsBook

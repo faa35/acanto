@@ -13,12 +13,12 @@ import BlurFade from "../magic-ui/blur-fade";
 import {
 	// ProjectCard,
 	NavBarCard,
-	AllianceDaoCard,
-	StationSetupCard,
-	AllianceLandingCard,
-	StationLandingCard,
-	DeveloperLandingCard,
-	StationUiCard,
+	ML_NN_Card,
+	JourneyGenie_Card,
+	FriendsBook_Card,
+	JourneyGeniev2_Card,
+	Portfolio_Card,
+	Hashmap_Card,
 	Footer,
 
 } from "@/components/cards";
@@ -76,14 +76,14 @@ const Grid = () => {
 				</div> */}
 
 				<div
-					key="station-landing"
+					key="journey-geniev2"
 					className={cn(styles.itemGrab, styles.item)}
 					style={{
 						transitionDuration: isMounted ? "700ms" : "0ms"
 					}}
         >
 					<BlurFade delay={0.55}>
-						<StationLandingCard />
+						<JourneyGeniev2_Card />
 					</BlurFade>
 				</div>
 				<div
@@ -99,58 +99,58 @@ const Grid = () => {
 				</div>
 
 				<div
-					key="station-setup"
+					key="journey-genie"
 					className={cn(styles.itemGrab, styles.item)}
 					style={{
 						transitionDuration: isMounted ? "700ms" : "0ms"
 					}}
         >
 					<BlurFade delay={0.60}>
-						<StationSetupCard />
+						<JourneyGenie_Card />
 					</BlurFade>
 				</div>
 				<div
-					key="alliance-dao"
+					key="ml-nn"
 					className={cn(styles.itemGrab, styles.item)}
 					style={{
 						transitionDuration: isMounted ? "700ms" : "0ms"
 					}}
         >
 					<BlurFade delay={0.65}>
-						<AllianceDaoCard />
+						<ML_NN_Card />
 					</BlurFade>
 				</div>
 				<div
-					key="alliance-landing"
+					key="friendsbook"
 					className={cn(styles.itemGrab, styles.item)}
 					style={{
 						transitionDuration: isMounted ? "700ms" : "0ms"
 					}}
         >
 					<BlurFade delay={0.70}>
-						<AllianceLandingCard />
+						<FriendsBook_Card />
 					</BlurFade>
 				</div>
 				<div
-					key="developer-landing"
+					key="portfolio"
 					className={cn(styles.itemGrab, styles.item)}
 					style={{
 						transitionDuration: isMounted ? "700ms" : "0ms"
 					}}
         >
 					<BlurFade delay={0.75}>
-						<DeveloperLandingCard />
+						<Portfolio_Card />
 					</BlurFade>
 				</div>
 				<div
-					key="station-ui"
+					key="hashmap"
 					className={cn(styles.itemGrab, styles.item)}
 					style={{
 						transitionDuration: isMounted ? "700ms" : "0ms"
 					}}
         >
 					<BlurFade delay={0.75}>
-						<StationUiCard />
+						<Hashmap_Card />
 					</BlurFade>
 				</div>
 
