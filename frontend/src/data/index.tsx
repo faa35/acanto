@@ -255,6 +255,11 @@ export const layouts = {
         x: 6, y: 15, w: 6, h: 7,
         isResizable: false,
       },
+      {
+        i: "search",
+        x: 0, y: 20, w: 6, h: 7,
+        isResizable: false,
+      },
 
     ],
     md: [ // 0px - 813px

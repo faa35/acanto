@@ -19,6 +19,7 @@ import {
 	JourneyGeniev2_Card,
 	Portfolio_Card,
 	Hashmap_Card,
+	Search_Card,
 	Footer,
 	AiChatButton,
 
@@ -153,6 +154,17 @@ const Grid = () => {
         >
 					<BlurFade delay={0.75}>
 						<Hashmap_Card />
+					</BlurFade>
+				</div>
+				<div
+					key="search"
+					className={cn(styles.itemGrab, styles.item)}
+					style={{
+						transitionDuration: isMounted ? "700ms" : "0ms"
+					}}
+        >
+					<BlurFade delay={0.75}>
+						<Search_Card />
 					</BlurFade>
 				</div>
 
