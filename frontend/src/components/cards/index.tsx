@@ -21,3 +21,4 @@ export { default as JourneyGeniev2_Card } from "./project-cards/journey_genie_v2
 export { default as JourneyGenie_Card } from "./project-cards/journey_genie-card";
 export { default as Hashmap_Card } from "./project-cards/hashmap-card";
 export { default as Search_Card } from "./project-cards/search-card";
+export { default as Tictactoe_Card } from "./project-cards/tictactoe-card";

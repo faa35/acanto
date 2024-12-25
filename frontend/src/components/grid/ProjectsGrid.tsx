@@ -20,6 +20,7 @@ import {
 	Portfolio_Card,
 	Hashmap_Card,
 	Search_Card,
+	Tictactoe_Card,
 	Footer,
 	AiChatButton,
 
@@ -165,6 +166,17 @@ const Grid = () => {
         >
 					<BlurFade delay={0.75}>
 						<Search_Card />
+					</BlurFade>
+				</div>
+				<div
+					key="tictactoe"
+					className={cn(styles.itemGrab, styles.item)}
+					style={{
+						transitionDuration: isMounted ? "700ms" : "0ms"
+					}}
+        >
+					<BlurFade delay={0.75}>
+						<Tictactoe_Card />
 					</BlurFade>
 				</div>
 

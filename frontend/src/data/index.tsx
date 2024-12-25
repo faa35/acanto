@@ -264,6 +264,11 @@ export const layouts = {
         x: 0, y: 20, w: 6, h: 7,
         isResizable: false,
       },
+      {
+        i: "tictactoe",
+        x: 6, y: 22, w: 6, h: 7,
+        isResizable: false,
+      }
 
     ],
     md: [ // 0px - 813px
@@ -308,7 +313,11 @@ export const layouts = {
         x: 0, y: 64, w: 12, h: 12,
         isResizable: false,
       },
-
+      {
+        i: "tictactoe",
+        x: 0, y: 76, w: 12, h: 12,
+        isResizable: false,
+      }
     ],
     sm: [ // 0px - 813px
       {
@@ -352,6 +361,12 @@ export const layouts = {
         x: 0, y: 68, w: 6, h: 11,
         isResizable: false,
       },
+      
+      {
+        i: "tictactoe",
+        x: 0, y: 79, w: 6, h: 11,
+        isResizable: false,
+      }
 
     ],
 
