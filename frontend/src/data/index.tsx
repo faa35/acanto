@@ -296,7 +296,12 @@ export const layouts = {
       },
       {
         i: "hashmap",
-        x: 6, y: 15, w: 6, h: 7,
+        x: 0, y: 52, w: 12, h: 12,
+        isResizable: false,
+      },
+      {
+        i: "search",
+        x: 0, y: 64, w: 12, h: 12,
         isResizable: false,
       },
 
@@ -335,7 +340,12 @@ export const layouts = {
       },
       {
         i: "hashmap",
-        x: 6, y: 15, w: 6, h: 7,
+        x: 6, y: 57, w: 6, h: 11,
+        isResizable: false,
+      },
+      {
+        i: "search",
+        x: 0, y: 68, w: 6, h: 11,
         isResizable: false,
       },
 
