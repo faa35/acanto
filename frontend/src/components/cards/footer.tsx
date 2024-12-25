@@ -12,16 +12,16 @@ const Footer = () => {
 
       {/* Social media icons */}
       <div className="social-icons">
-        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/faa35" target="_blank" rel="noopener noreferrer">
           <FaGithub size={24} className="icon" />
         </a>
-        <a href="https://www.linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/in/fardin-abdulla-acanto-401b6532b/" target="_blank" rel="noopener noreferrer">
           <FaLinkedin size={24} className="icon" />
         </a>
-        <a href="mailto:your.email@example.com">
+        <a href="mailto:abdullafardin2202@gmail.com">
           <FaEnvelope size={24} className="icon" />
         </a>
-        <a href="https://www.instagram.com/yourusername" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/acanto_abdulla/" target="_blank" rel="noopener noreferrer">
           <FaInstagram size={24} className="icon" />
         </a>
       </div>
