@@ -155,59 +155,63 @@ export const layouts = {
         isResizable: false,
       },
       {
+        i: "map",
+        x: 0, y: 7, w: 5, h: 5,
+        isResizable: false,
+      },
+      {
         i: "resume",
-        x:0, y:7, w: 2.5, h: 2.5,
+        x:0, y:12, w: 2.5, h: 2.5,
         isResizable: false,
       },
 
       {
         i: "github",
-        x:0, y: 9.5, w: 2.5, h: 3.5,
+        x:0, y: 14.5, w: 2.5, h: 3.5,
         isResizable: false,
       },
       
       {
         i: "chat-card",
-        x: 3, y: 7, w: 1.5, h: 6,
+        x: 3, y: 12, w: 1.5, h: 6,
         isResizable: false,
       },
       {
         i: "discord",
-        x: 0, y: 13, w: 4, h: 10,
+        x: 0, y: 18, w: 4, h: 10,
         isResizable: false,
       },
       {
-        i: "lastfm",
-        x: 0, y: 23, w: 4, h: 11,
+        i: "chat-card-2",
+        x: 0, y: 28, w: 1.7, h: 7.5,
         isResizable: false,
       },
       {
         i: "linkedin",
-        x: 1.7, y: 34, w: 2.3, h: 2.5,
-        isResizable: false,
-      },
-
-      {
-        i: "email",
-        x: 1.7, y: 36.5, w: 2.3, h: 2.5,
+        x: 1.7, y: 28, w: 2.3, h: 3.75,
         isResizable: false,
       },
       {
         i: "codepen",
-        x: 1.7, y: 39, w: 2.3, h: 2.5,
+        x: 1.7, y: 31.75, w: 2.3, h: 3.75,
         isResizable: false,
       },
+      {
+        i: "lastfm",
+        x: 0, y: 35.5, w: 4, h: 11,
+        isResizable: false,
+      },
+
+
+      {
+        i: "email",
+        x: 1.7, y: 46.5, w: 4, h: 2.5,
+        isResizable: false,
+      },
+
       
-      {
-        i: "chat-card-2",
-        x: 0, y: 34, w: 1.7, h: 7.5,
-        isResizable: false,
-      },
-      {
-        i: "map",
-        x: 0, y: 41.5, w: 4, h: 5,
-        isResizable: false,
-      },
+
+
 
 
     ],
