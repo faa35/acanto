@@ -38,7 +38,7 @@ const Tictactoe = () => {
               <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
                 TicTacToe with Adversarial Search
               </h1>
-              <SendmessageIcon link="https://github.com/faa35/A2-AI" lottieName="DeveloperLandingIcon" />
+              <SendmessageIcon link="https://github.com/faa35/A2-AI" lottieName="TicTacToeIcon" />
             </div>
             <div className="flex gap-2 flex-wrap mt-1">
               <Badge variant="default" className="text-xs">

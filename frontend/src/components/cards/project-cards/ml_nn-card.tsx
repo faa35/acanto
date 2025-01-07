@@ -41,7 +41,7 @@ const ML_NN = () => {
               <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
                Machine Learning Neural Network
               </h1>
-              <SendmessageIcon link="https://github.com/faa35/A4-AI" lottieName="AllianceDaoIcon" />
+              <SendmessageIcon link="https://github.com/faa35/A4-AI" lottieName="MLIcon" />
             </div>
             <div className="flex gap-2 flex-wrap mt-1">
               <Badge variant="default" className="text-xs">

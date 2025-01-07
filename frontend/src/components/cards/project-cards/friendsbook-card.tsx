@@ -39,7 +39,7 @@ const FriendsBook = () => {
                 FriendsBook - Social Network
                 {/* netwoeking Platform  */}
               </h1>
-              <SendmessageIcon link="https://github.com/faa35/CMPT-225-A1" lottieName="AllianceLandingIcon" />
+              <SendmessageIcon link="https://github.com/faa35/CMPT-225-A1" lottieName="FriendsbookIcon" />
             </div>
             <div className="flex gap-2 flex-wrap mt-1">
               <Badge variant="default" className="text-xs">

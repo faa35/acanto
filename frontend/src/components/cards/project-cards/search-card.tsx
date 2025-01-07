@@ -38,7 +38,7 @@ const Search = () => {
               <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
                 Vacuum Search Agent
               </h1>
-              <SendmessageIcon link="https://github.com/faa35/A1-AI" lottieName="DeveloperLandingIcon" />
+              <SendmessageIcon link="https://github.com/faa35/A1-AI" lottieName="SearchIcon" />
             </div>
             <div className="flex gap-2 flex-wrap mt-1">
               <Badge variant="default" className="text-xs">

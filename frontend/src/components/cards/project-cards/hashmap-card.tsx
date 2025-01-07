@@ -38,7 +38,7 @@ const Hashmap = () => {
             <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
               Collision-Resistant Hashmap
             </h1>
-            <SendmessageIcon link="https://github.com/faa35/CMPT-225-A5" lottieName="StationSetupIcon" />
+            <SendmessageIcon link="https://github.com/faa35/CMPT-225-A5" lottieName="HashMapIcon" />
           </div>
           <div className="flex gap-2 flex-wrap mt-1">
             <Badge variant="default" className="text-xs">

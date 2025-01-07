@@ -38,7 +38,7 @@ const JourneyGeniev2 = () => {
             <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
               Journey Genie v2
             </h1>
-            <SendmessageIcon link="https://github.com/faa35/journey-genie-v2" lottieName="StationLandingIcon" />
+            <SendmessageIcon link="https://github.com/faa35/journey-genie-v2" lottieName="JGV2Icon" />
           </div>
           <div className="flex gap-2 flex-wrap mt-1">
             <Badge variant="default" className="text-xs">
