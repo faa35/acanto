@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.joshuabrigati.com/Screenshot.png",
+        url: "https://acanto7.vercel.app/Screenshot2.png",
         width: 3410,
         height: 2072,
         alt: "Fardin Abdulla - Portfolio",
