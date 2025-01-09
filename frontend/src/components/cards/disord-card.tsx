@@ -33,7 +33,7 @@ const DiscordCard = () => {
   useEffect(() => {
     const fetchDiscordData = async () => {
       try {
-        const { data } = await axios.get("https://acanto7.onrender.com/api/details");
+        const { data } = await axios.get("https://acanto7.onrender.com/api/details"); // http://localhost:8080/api/details
         const discordUserId = data.discordUserId;
 
         const response = await axios.get(
@@ -175,6 +175,12 @@ const DiscordCard = () => {
                 <img
                   src="/tech-icons/valorant.svg"
                   alt="Valorant Icon"
+                  className="w-10 h-10 rounded-md bg-gray-700"
+                />
+              ) : discordData.activity.startsWith("Brave") ? (
+                <img
+                  src="/tech-icons/brave.svg"
+                  alt="Brave Icon"
                   className="w-10 h-10 rounded-md bg-gray-700"
                 />
               ) : (
