@@ -53,9 +53,14 @@ const LastfmCard = () => {
       {/* Card Wrapper ensures the outer container styling */}
       <div className="text-white rounded-3xl p-8 h-full flex flex-col lg:flex-row gap-8 justify-between relative shadow-lg">
         {/* Spotify Icon */}
-        <div className="absolute top-4 right-4 bg-[#e4d8b4] p-4 rounded-full shadow-md">
-          <FaSpotify size={30} className="text-black" />
+        <div className={`absolute top-3 right-3 p-3 rounded-full shadow-md ${resolvedTheme === "dark" ? "bg-[#291e40]" : "bg-[#b0b5bf]"}`}>
+          <FaSpotify size={40} className={resolvedTheme === "dark" ? "text-green" : "text-black"}  />
         </div>
+
+{/* bg-[#b0b5bf] */}
+                
+{/* for dark bg-[#e4d8b4] */}
+
 
         {/* Last Played Track */}
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">

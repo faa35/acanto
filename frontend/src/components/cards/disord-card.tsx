@@ -117,10 +117,11 @@ const DiscordCard = () => {
         }}
       >
         {/* Wide background card - now covering whole top, left, and right */}
-        <div className="bg-[#2d2f38] absolute top-0 left-0 right-0 h-24 rounded-t-2xl">
+        {/* bg-[#2d2f38] */}
+        <div className="bg-[rgba(45,47,56,0.5)] absolute top-0 left-0 right-0 h-24 rounded-t-2xl">  
           {/* Discord Icon */}
-          <div className="absolute top-4 right-4 bg-[#e4d8b4] p-4 rounded-full shadow-md">
-            <FaDiscord size={30} className="text-black" />
+          <div className={`absolute top-3 right-3 p-3 rounded-full shadow-md ${resolvedTheme === "dark" ? "bg-[#291e40]" : "bg-[#b0b5bf]"}`}>
+            <FaDiscord size={40} className={resolvedTheme === "dark" ? "text-green" : "text-black"} />
           </div>
 
           {/* Profile Picture - Overlapping the card */}
@@ -161,7 +162,7 @@ const DiscordCard = () => {
           {/* Status Section */}
           <div
             className={`flex items-center justify-between rounded-lg p-4 ${
-              resolvedTheme === "dark" ? "bg-[#100524]" : "bg-[#363945]"
+              resolvedTheme === "dark" ? "bg-[rgba(45,47,56,0.5)]" : "bg-[rgba(45,47,56,0.5)]"
             }`}
           >
             <div className="flex items-center gap-3">

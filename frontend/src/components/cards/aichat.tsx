@@ -187,8 +187,8 @@ const AiChatbot: React.FC = () => {
             <button 
               onClick={handleSendMessage}
               disabled={isLoading || inputMessage.trim() === ''}
-              className=" bg-blue-500 text-white rounded-full 
-                         hover:bg-blue-600 disabled:bg-gray-400 
+              className=" bg-green-400 text-white rounded-full 
+                         hover:bg-blue-600 disabled:bg-red-400 
                          transition-colors duration-200 
                          flex items-center justify-center"
             >
