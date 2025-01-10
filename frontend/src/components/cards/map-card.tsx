@@ -27,7 +27,7 @@ const MapCard = () => {
     const loadGoogleMaps = async () => {
       try {
         // Use Axios to fetch the Google Maps API key from your backend
-        const { data } = await axios.get('https://acanto7.onrender.com/api/details');
+        const { data } = await axios.get('https://journey-genie-v2.onrender.com/api/details');
         const googleMapsApiKey = data.googleMapsApiKey;
 
         // Dynamically load the Google Maps JavaScript API

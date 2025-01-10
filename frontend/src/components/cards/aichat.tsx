@@ -24,7 +24,7 @@ const AiChatbot: React.FC = () => {
 
   const fetchGeminiApiKey = async () => {
     try {
-      const response = await axios.get('https://acanto7.onrender.com/api/details');
+      const response = await axios.get('https://journey-genie-v2.onrender.com/api/details');
       return response.data.geminiApiKey;
     } catch (error) {
       console.error('Error fetching API key:', error);

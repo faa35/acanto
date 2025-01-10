@@ -24,7 +24,7 @@ const LastfmCard = () => {
   useEffect(() => {
     // Fetch Last.fm API Key and Username from the backend
     axios
-      .get("https://acanto7.onrender.com/api/details")
+      .get("https://journey-genie-v2.onrender.com/api/details")
       .then((response) => {
         const { lastFmApiKey, lastFmUsername } = response.data;
         setLastFmDetails({ lastFmApiKey, lastFmUsername });
