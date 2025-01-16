@@ -55,7 +55,7 @@ const AiChatbot: React.FC = () => {
       if (!apiKey) {
         throw new Error("API key not available");
       }
-
+  
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
@@ -65,7 +65,7 @@ const AiChatbot: React.FC = () => {
               role: "system",
               content: `You are a chatbot assisting users with questions about the person described in this resume.
               Always respond in 3 lines or less. Use this resume:\n\n${resumeContent}\n\nIf asked "Who are you?"
-              reply "I am Fardin's personal assistant." For questions about technologies, confirm if they were used in a listed project and always provide the project name and link.`,
+              reply "I am Fardin's personal assistant." For questions about technologies, confirm if they were used in a listed project, and always provide the project link at the start of the relevant sentence for clarity.`,
             },
             { role: "user", content: prompt },
           ],
@@ -77,13 +77,14 @@ const AiChatbot: React.FC = () => {
           },
         }
       );
-
+  
       return response.data.choices[0].message.content;
     } catch (error) {
       console.error("Error generating content:", error);
       return "Sorry, I encountered an error generating a response.";
     }
   };
+  
 
   const handleSendMessage = async () => {
     if (inputMessage.trim() === "") return;
@@ -132,7 +133,7 @@ const AiChatbot: React.FC = () => {
 
   const renderMessage = (text: string) => {
     // Regex to detect URLs and ensure trailing punctuation (e.g., ".", ",") is excluded
-    const urlRegex = /(https?:\/\/[^\s.,!?]+)/g;
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts = text.split(urlRegex);
 
     return parts.map((part, index) =>
