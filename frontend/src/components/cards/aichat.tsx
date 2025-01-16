@@ -42,7 +42,7 @@ const AiChatbot: React.FC = () => {
 
   const fetchApiKey = async (): Promise<string | null> => {
     try {
-      const response = await axios.get("http://localhost:8080/api/details");
+      const response = await axios.get("https://journey-genie-v2.onrender.com/api/details");
       return response.data.openaiApiKey || null;
     } catch (error) {
       console.error("Error fetching API key:", error);
