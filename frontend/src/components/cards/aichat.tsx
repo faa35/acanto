@@ -67,7 +67,7 @@ const AiChatbot: React.FC = () => {
               Always respond in 3 lines or less. Use this resume:\n\n${resumeContent}\n\nIf asked "Who are you?" 
               reply "I am Fardin's personal assistant." For questions about technologies, 
               confirm if they were used in a listed project and provide the project name and 
-              link and make sure there is a space betweeon the link ends and the full stop .`,
+              link(which is a must) and make sure there is a space between where the link ends and the full stop.`,
             },
             { role: "user", content: prompt },
           ],
