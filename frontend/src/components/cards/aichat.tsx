@@ -16,19 +16,15 @@ type Message = {
 
 const resumeContent = `
 Machine Learning Project
-- Repository: https://github.com/faa35/A4-AI
 - Technologies: Python, NumPy
 
 JourneyGenie Web App
-- Repository: https://github.com/faa35/journey-genie
 - Technologies: Spring Boot, JavaScript, PostgreSQL, Bootstrap, MockMvc, JUnit, Docker
 
 Collision-Resistant Hashmap for FriendsBook - Social Networking Platform
-- Repository: https://github.com/faa35/CMPT-225-A5
 - Technologies: C++, Object-Oriented Programming, Data Structures
 
 Personal Portfolio Web App
-- Repository: https://github.com/faa35/acanto
 - Technologies: Next.js, React, TypeScript, Tailwind CSS
 `;
 
@@ -66,8 +62,7 @@ const AiChatbot: React.FC = () => {
               content: `You are a chatbot assisting users with questions about the person described in this resume. 
               Always respond in 3 lines or less. Use this resume:\n\n${resumeContent}\n\n
               If asked "Who are you?" reply "I am Fardin's personal assistant."
-              For questions about technologies, confirm if they were used in a listed project and always start the sentence with the project link. 
-              Ensure there is a space between where the link ends and the rest of the sentence. Including the link is mandatory when discussing a project or technology.`,
+              For questions about technologies, confirm if they were used in a listed project`,
             },
             { role: "user", content: prompt },
           ],
