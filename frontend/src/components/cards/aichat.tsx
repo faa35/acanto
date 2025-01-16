@@ -55,7 +55,7 @@ const AiChatbot: React.FC = () => {
       if (!apiKey) {
         throw new Error("API key not available");
       }
-  
+
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
@@ -63,9 +63,11 @@ const AiChatbot: React.FC = () => {
           messages: [
             {
               role: "system",
-              content: `You are a chatbot assisting users with questions about the person described in this resume.
-              Always respond in 3 lines or less. Use this resume:\n\n${resumeContent}\n\nIf asked "Who are you?"
-              reply "I am Fardin's personal assistant." For questions about technologies, confirm if they were used in a listed project, and always provide the project link at the start of the relevant sentence for clarity.`,
+              content: `You are a chatbot assisting users with questions about the person described in this resume. 
+              Always respond in 3 lines or less. Use this resume:\n\n${resumeContent}\n\nIf asked "Who are you?" 
+              reply "I am Fardin's personal assistant." For questions about technologies, 
+              confirm if they were used in a listed project and provide the project name and 
+              link and make sure there is a space betweeon the link ends and the full stop .`,
             },
             { role: "user", content: prompt },
           ],
@@ -77,14 +79,13 @@ const AiChatbot: React.FC = () => {
           },
         }
       );
-  
+
       return response.data.choices[0].message.content;
     } catch (error) {
       console.error("Error generating content:", error);
       return "Sorry, I encountered an error generating a response.";
     }
   };
-  
 
   const handleSendMessage = async () => {
     if (inputMessage.trim() === "") return;
@@ -132,10 +133,8 @@ const AiChatbot: React.FC = () => {
   };
 
   const renderMessage = (text: string) => {
-    // Regex to detect URLs and ensure trailing punctuation (e.g., ".", ",") is excluded
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts = text.split(urlRegex);
-
     return parts.map((part, index) =>
       urlRegex.test(part) ? (
         <a
@@ -152,7 +151,6 @@ const AiChatbot: React.FC = () => {
       )
     );
   };
-
 
   useEffect(() => {
     if (chatContentRef.current) {
@@ -206,14 +204,16 @@ const AiChatbot: React.FC = () => {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex w-full ${msg.sender === "user" ? "justify-end" : "justify-start"
-                  }`}
+                className={`flex w-full ${
+                  msg.sender === "user" ? "justify-end" : "justify-start"
+                }`}
               >
                 <div
-                  className={`max-w-[75%] p-3 rounded-lg ${msg.sender === "user"
+                  className={`max-w-[75%] p-3 rounded-lg ${
+                    msg.sender === "user"
                       ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
                       : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-                    }`}
+                  }`}
                 >
                   {renderMessage(msg.text)}
                 </div>
