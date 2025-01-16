@@ -14,7 +14,6 @@ type Message = {
   timestamp?: Date;
 };
 
-// Add your resume as a string
 const resumeContent = `
 Machine Learning Project
 - Repository: https://github.com/faa35/A4-AI
@@ -129,6 +128,26 @@ const AiChatbot: React.FC = () => {
     }
   };
 
+  const renderMessage = (text: string) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+    return parts.map((part, index) =>
+      urlRegex.test(part) ? (
+        <a
+          key={index}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 underline hover:text-blue-700"
+        >
+          {part}
+        </a>
+      ) : (
+        part
+      )
+    );
+  };
+
   useEffect(() => {
     if (chatContentRef.current) {
       chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
@@ -192,7 +211,7 @@ const AiChatbot: React.FC = () => {
                       : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
                   }`}
                 >
-                  {msg.text}
+                  {renderMessage(msg.text)}
                 </div>
               </div>
             ))}
