@@ -131,8 +131,10 @@ const AiChatbot: React.FC = () => {
   };
 
   const renderMessage = (text: string) => {
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    // Regex to detect URLs and ensure trailing punctuation (e.g., ".", ",") is excluded
+    const urlRegex = /(https?:\/\/[^\s.,!?]+)/g;
     const parts = text.split(urlRegex);
+
     return parts.map((part, index) =>
       urlRegex.test(part) ? (
         <a
@@ -149,6 +151,7 @@ const AiChatbot: React.FC = () => {
       )
     );
   };
+
 
   useEffect(() => {
     if (chatContentRef.current) {
@@ -202,16 +205,14 @@ const AiChatbot: React.FC = () => {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex w-full ${
-                  msg.sender === "user" ? "justify-end" : "justify-start"
-                }`}
+                className={`flex w-full ${msg.sender === "user" ? "justify-end" : "justify-start"
+                  }`}
               >
                 <div
-                  className={`max-w-[75%] p-3 rounded-lg ${
-                    msg.sender === "user"
+                  className={`max-w-[75%] p-3 rounded-lg ${msg.sender === "user"
                       ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
                       : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-                  }`}
+                    }`}
                 >
                   {renderMessage(msg.text)}
                 </div>
