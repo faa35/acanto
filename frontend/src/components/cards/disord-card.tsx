@@ -178,6 +178,12 @@ const DiscordCard = () => {
                   alt="Valorant Icon"
                   className="w-10 h-10 rounded-md bg-gray-700"
                 />
+              ): discordData.activity.startsWith("OneNote") ? (
+                <img
+                  src="/tech-icons/onenote.svg"
+                  alt="OneNote Icon"
+                  className="w-10 h-10 rounded-md bg-gray-700"
+                />
               ) : discordData.activity.startsWith("Brave") ? (
                 <img
                   src="/tech-icons/brave.svg"

@@ -18,7 +18,7 @@ public class PersonalwebApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**") 
-				.allowedOrigins("https://acanto7.vercel.app")
+				.allowedOrigins("http://localhost:3000")  //https://acanto7.vercel.app
 				.allowedHeaders("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
 			}
