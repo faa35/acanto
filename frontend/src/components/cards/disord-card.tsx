@@ -127,9 +127,7 @@ const DiscordCard = () => {
           {/* Profile Picture - Overlapping the card */}
           <div className="absolute -bottom-8 left-4">
             <div
-              className={`w-24 h-24 rounded-full overflow-hidden bg-zinc-800 border-4 border-[#e6eaf0] ${
-                resolvedTheme === "dark" ? "grayscale-0" : "grayscale"
-              } hover:grayscale-0 transition-all duration-300`}
+              className="w-24 h-24 rounded-full overflow-hidden bg-zinc-800 border-4 border-[#e6eaf0] "
             >
               <img
                 src={discordData.avatar || "/static/avatar.webp"}
