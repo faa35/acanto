@@ -21,17 +21,26 @@ const Portfolio = () => {
             />
           </div>
         </div>
-          <div className="flex flex-col items-start gap-1">
-            <h4 className="text-xs font-medium opacity-80 uppercase flex flex-wrap gap-2 items-center">
-              <span>Project at</span>
+          <div className="flex flex-col items-start">
+            <h4 className="text-xs font-medium opacity-80 uppercase flex flex-wrap gap-1 items-center">
+              <span>Personal Project </span>
               <span className="flex gap-1">
                 <Image
-                  src="/companies/SFU-block-logo.svg.png"
-                  alt="SFU logo"
-                  height={20}
-                  width={32}
+                  src="/companies/YOLO_Badge.png"
+                  alt="Yolo Badge"
+                  height={40}
+                  width={40}
                 />
-                Simon Fraser University
+                {/* Simon Fraser University */}
+              </span>
+              <span className="flex gap-1">
+                <Image
+                  src="/companies/PullShark.png"
+                  alt="YOLO Badge"
+                  height={40}
+                  width={42}
+                />
+                   
               </span>
             </h4>
             <div className="w-full flex gap-2 items-center">

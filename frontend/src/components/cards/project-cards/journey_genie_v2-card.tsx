@@ -23,16 +23,34 @@ const JourneyGeniev2 = () => {
         </div>
         <div className="flex flex-col items-start gap-1">
           <h4 className="text-xs font-medium opacity-80 uppercase flex flex-wrap gap-2 items-center">
-            <span>Project at</span>
-            <span className="flex gap-1">
-              <Image
-                src="/companies/SFU-block-logo.svg.png"
-                alt="SFU logo"
-                height={20}
-                width={32}
-              />
-              Simon Fraser University
-            </span>
+            <span>Personal Project</span>
+              <span className="flex gap-1">
+                <Image
+                  src="/companies/YOLO_Badge.png"
+                  alt="YOLO Badge"
+                  height={40}
+                  width={40}
+                />
+                {/* Simon Fraser University */}
+              </span>
+              <span className="flex gap-1">
+                <Image
+                  src="/companies/PullShark.png"
+                  alt="YOLO Badge"
+                  height={40}
+                  width={42}
+                />
+                {/* Simon Fraser University */}
+              </span> 
+              <span className="flex gap-1">
+                <Image
+                  src="/companies/QuickDraw_SkinTone1.png"
+                  alt="YOLO Badge"
+                  height={40}
+                  width={42}
+                />
+                {/* Simon Fraser University */}
+              </span>
           </h4>
           <div className="w-full flex gap-2 items-center">
             <h1 className="text-2xl font-medium dark:text-white text-black uppercase opacity-90">
