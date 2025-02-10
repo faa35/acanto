@@ -75,7 +75,7 @@ const Portfolio = () => {
                 LastFM API
               </Badge>
               <Badge variant="default" className="text-xs">
-                Goggle Maps API
+                OpenAI API
               </Badge>
               <Badge variant="default" className="text-xs">
                 Lanyard API(For Discord)
