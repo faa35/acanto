@@ -28,17 +28,17 @@ const Portfolio = () => {
                 <Image
                   src="/companies/YOLO_Badge.png"
                   alt="Yolo Badge"
-                  height={40}
-                  width={40}
+                  height={30}
+                  width={30}
                 />
                 {/* Simon Fraser University */}
               </span>
               <span className="flex gap-1">
                 <Image
                   src="/companies/PullShark.png"
-                  alt="YOLO Badge"
-                  height={40}
-                  width={42}
+                  alt="PullShark Badge"
+                  height={30}
+                  width={30}
                 />
                    
               </span>
@@ -69,7 +69,16 @@ const Portfolio = () => {
                 Vercel + Render
               </Badge>
               <Badge variant="default" className="text-xs">
-                3 APIs
+                Goggle Maps API
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                LastFM API
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                Goggle Maps API
+              </Badge>
+              <Badge variant="default" className="text-xs">
+                Lanyard API(For Discord)
               </Badge>
             </div>
           </div>

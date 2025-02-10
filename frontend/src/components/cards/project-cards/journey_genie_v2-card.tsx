@@ -28,26 +28,26 @@ const JourneyGeniev2 = () => {
                 <Image
                   src="/companies/YOLO_Badge.png"
                   alt="YOLO Badge"
-                  height={40}
-                  width={40}
+                  height={30}
+                  width={30}
                 />
                 {/* Simon Fraser University */}
               </span>
               <span className="flex gap-1">
                 <Image
                   src="/companies/PullShark.png"
-                  alt="YOLO Badge"
-                  height={40}
-                  width={42}
+                  alt="PullShark Badge"
+                  height={30}
+                  width={30}
                 />
                 {/* Simon Fraser University */}
               </span> 
               <span className="flex gap-1">
                 <Image
                   src="/companies/QuickDraw_SkinTone1.png"
-                  alt="YOLO Badge"
-                  height={40}
-                  width={42}
+                  alt="QuickDraw Badge"
+                  height={30}
+                  width={30}
                 />
                 {/* Simon Fraser University */}
               </span>
