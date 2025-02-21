@@ -5,18 +5,26 @@ import CardWrapper from './card-wrapper';
 // Define custom interface for the Google Maps 3D element
 interface GoogleMap3DElement extends HTMLElement {
   ready: () => Promise<void>;
+  flyCameraAround?: (options: {
+    camera: { center: { lat: number; lng: number; altitude: number }; tilt: number; range: number };
+    durationMillis: number;
+    rounds: number;
+  }) => void;
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'gmp-map-3d': React.DetailedHTMLProps<React.HTMLAttributes<GoogleMap3DElement> & {
-        mode?: string;
-        center?: string;
-        range?: string | number;
-        tilt?: string | number;
-        heading?: string | number;
-      }, GoogleMap3DElement>;
+      'gmp-map-3d': React.DetailedHTMLProps<
+        React.HTMLAttributes<GoogleMap3DElement> & {
+          mode?: string;
+          center?: string;
+          range?: string | number;
+          tilt?: string | number;
+          heading?: string | number;
+        },
+        GoogleMap3DElement
+      >;
     }
   }
 
@@ -32,30 +40,26 @@ declare global {
 const MapCard = () => {
   const mapRef = useRef<GoogleMap3DElement | null>(null);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
-  const [mapInitialized, setMapInitialized] = useState(false); // Track initialization state
+  const [mapInitialized, setMapInitialized] = useState(false);
   const map3DInstanceRef = useRef<any>(null);
 
   useEffect(() => {
     const loadGoogleMapsScript = async () => {
       try {
-        // Get API key from backend
         const { data } = await axios.get('https://journey-genie-v2.onrender.com/api/details');
         const googleMapsApiKey = data.googleMapsApiKey;
 
-        // Create script element if it doesn't exist yet
         if (!scriptRef.current) {
           const script = document.createElement('script');
           script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&v=alpha&libraries=maps3d`;
           script.async = true;
 
-          // Setup onload handler to initialize rotation
           script.onload = () => {
             console.log('Google Maps script loaded, initializing rotation');
             initializeMapRotation();
             removeAlphaBanner();
           };
 
-          // Add to document
           document.head.appendChild(script);
           scriptRef.current = script;
         }
@@ -79,25 +83,22 @@ const MapCard = () => {
 
           console.log('Setting up map rotation');
 
-          // Access the map element instance
           const mapElement = mapRef.current;
 
-          // Wait for the map to be fully loaded
+          console.log('Map Element Instance:', mapElement); // Debugging log
+
           if (typeof mapElement.ready === 'function') {
             await mapElement.ready();
           }
 
-          // Store map instance for cleanup
           map3DInstanceRef.current = mapElement;
-
-          // Set map as initialized
           setMapInitialized(true);
 
           console.log('Map rotation initialized');
         } catch (error) {
           console.error('Error initializing map rotation:', error);
         }
-      }, 1500); // Give the map time to initialize
+      }, 1500);
     };
 
     const removeAlphaBanner = () => {
@@ -115,9 +116,7 @@ const MapCard = () => {
 
     loadGoogleMapsScript();
 
-    // Cleanup
     return () => {
-      // Remove script if it exists
       if (scriptRef.current && document.head.contains(scriptRef.current)) {
         document.head.removeChild(scriptRef.current);
         scriptRef.current = null;
@@ -129,6 +128,19 @@ const MapCard = () => {
     if (mapInitialized && mapRef.current) {
       const flyCamera = () => {
         const mapElement = mapRef.current;
+
+        if (!mapElement) {
+          console.warn("Map element is not available");
+          return;
+        }
+
+        console.log("Checking mapElement methods:", mapElement);
+
+        if (typeof mapElement.flyCameraAround !== "function") {
+          console.warn("flyCameraAround method is not available on mapElement");
+          return;
+        }
+
         const camera = {
           center: { lat: 49.2791, lng: -122.9202, altitude: 0 },
           tilt: 67,
@@ -137,9 +149,11 @@ const MapCard = () => {
 
         mapElement.flyCameraAround({
           camera,
-          durationMillis: 50000, // Reduced to 50 seconds for smoother experience
+          durationMillis: 50000,
           rounds: 1,
         });
+
+        console.log("flyCameraAround executed successfully");
       };
 
       flyCamera();
@@ -160,7 +174,7 @@ const MapCard = () => {
         <gmp-map-3d
           ref={mapRef}
           mode="hybrid"
-          center="49.2791, -122.9202" // SFU location
+          center="49.2791, -122.9202"
           range="2000"
           tilt="65"
           heading="0"
