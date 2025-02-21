@@ -46,7 +46,7 @@ const MapCard = () => {
   useEffect(() => {
     const loadGoogleMapsScript = async () => {
       try {
-        const { data } = await axios.get('https://journey-genie-v2.onrender.com/api/details');
+        const { data } = await axios.get('http://localhost:8080/api/details');
         const googleMapsApiKey = data.googleMapsApiKey;
 
         if (!scriptRef.current) {
@@ -143,13 +143,13 @@ const MapCard = () => {
 
         const camera = {
           center: { lat: 49.2791, lng: -122.9202, altitude: 0 },
-          tilt: 67,
-          range: 2100,
+          tilt: 67, // 67 degrees
+          range: 2100, // 2100 meters
         };
 
         mapElement.flyCameraAround({
           camera,
-          durationMillis: 50000,
+          durationMillis: 50000, // 50 seconds
           rounds: 1,
         });
 
@@ -175,8 +175,8 @@ const MapCard = () => {
           ref={mapRef}
           mode="hybrid"
           center="49.2791, -122.9202"
-          range="2000"
-          tilt="65"
+          range="2000" // 2000 meters
+          tilt="65" // 65 degrees
           heading="0"
           style={{
             width: '100%',
