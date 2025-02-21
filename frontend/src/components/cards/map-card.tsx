@@ -46,7 +46,7 @@ const MapCard = () => {
   useEffect(() => {
     const loadGoogleMapsScript = async () => {
       try {
-        const { data } = await axios.get('http://localhost:8080/api/details');
+        const { data } = await axios.get('https://journey-genie-v2.onrender.com/api/details');
         const googleMapsApiKey = data.googleMapsApiKey;
 
         if (!scriptRef.current) {
