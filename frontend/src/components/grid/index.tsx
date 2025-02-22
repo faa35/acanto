@@ -11,7 +11,7 @@ import { heights, layouts } from "@/data";
 import ThemeToggle from "../theme-toggle";
 import BlurFade from "../magic-ui/blur-fade";
 import {
-	TextMarqueeCard,
+	
 	DiscordCard,
 	LastfmCard,
 	AboutCard,
