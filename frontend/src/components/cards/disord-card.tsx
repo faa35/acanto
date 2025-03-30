@@ -54,16 +54,50 @@ const DiscordCard = () => {
         let activity = "No activity";
         let elapsedTime: number | null = null;
 
-        // Handling activity
-        if (user.activities.length) {
-          const firstActivity = user.activities[0];
-          activity =
-            firstActivity.state && firstActivity.state !== "No Details"
-              ? `${firstActivity.name}: ${firstActivity.state}`
-              : firstActivity.name;
+        // // Handling activity
+        // if (user.activities.length) {
+        //   const firstActivity = user.activities[0];
+        //   activity =
+        //     firstActivity.state && firstActivity.state !== "No Details"
+        //       ? `${firstActivity.name}: ${firstActivity.state}`
+        //       : firstActivity.name;
 
-          if (firstActivity.timestamps?.start) {
-            elapsedTime = Date.now() - firstActivity.timestamps.start;
+        //   if (firstActivity.timestamps?.start) {
+        //     elapsedTime = Date.now() - firstActivity.timestamps.start;
+        //   }
+        // }
+
+
+
+
+        // Discord Activity Display Fix
+        // Problem
+        // I had an issue with my Discord status component where it was displaying my Spotify activity even when I had other applications like Visual Studio Code running. I wanted the component to prioritize showing other activities over Spotify.
+        // Solution
+        // I modified the activity selection logic to filter out Spotify from the activities list when other applications are running. Here's what I did:
+        
+        // Identified that the issue was in the activity selection code, which was always picking the first item from the activities array.
+        // Implemented a search function using JavaScript's find() method to look for the first non-Spotify activity in the array.
+        // If a non-Spotify activity was found (like VS Code, Valorant, etc.), the component now displays that instead.
+        // Added proper TypeScript typing to the function parameters to avoid compilation errors.        
+
+
+        // Inside the fetchDiscordData function, replace the current activity handling code with this:
+        // Handling activity - prioritize non-Spotify applications
+        if (user.activities.length) {
+          // Find the first non-Spotify activity
+          const nonSpotifyActivity = user.activities.find((act: any)  => act.name !== "Spotify");
+          
+          // Use the non-Spotify activity if found, otherwise fallback to the first activity
+          const selectedActivity = nonSpotifyActivity || user.activities[0];
+          
+          activity =
+            selectedActivity.state && selectedActivity.state !== "No Details"
+              ? `${selectedActivity.name}: ${selectedActivity.state}`
+              : selectedActivity.name;
+
+          if (selectedActivity.timestamps?.start) {
+            elapsedTime = Date.now() - selectedActivity.timestamps.start;
           }
         }
 
