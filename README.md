@@ -1,18 +1,7 @@
-
-
 Personal Portfolio Web App
-Dec 2023 - Current 
 
-Developed a full-stack personal portfolio website using Java Spring Boot for the backend and Next.js with React and TypeScript for the frontend, enabling real-time integration of user-specific data.
-Designed and implemented key features including:
 
-Live Music Status: Integrated Last.fm API to display real-time music listening activity, including track details and album artwork.
-
-Discord Activity: Utilized the Lanyard API to show real-time Discord status, including platform, activity, and elapsed time.
-
-3D Map Visualization: Implemented dynamic Google Maps rendering using the Google Maps API, allowing interactive map-based visuals of specified locations.
-
-AI Chatbot: Integrated the Google Gemini API to enable AI-powered responses for user queries in a sleek and interactive chat interface.
+My portfolio combines React , Next.js , TypeScript  and Spring Boot to deliver a seamless and engaging user experience. It features a dynamic 3D Google Maps visualization that rotates around my school, Simon Fraser University, a Discord status card displaying my real-time activity, a Spotify integration showing what I am currently listening to, and an AI chatbot to answer queries about my skills, projects, and experiences.
 
 Deployed the frontend on Vercel and the backend on Render, ensuring secure CORS configurations for seamless API interaction.
 
