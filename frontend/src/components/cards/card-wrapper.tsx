@@ -1,86 +1,60 @@
-import { ReactNode, useEffect, useState } from "react";
-import { useTheme } from "next-themes";
+"use client";
 
-const shineMaskImage = `
-  radial-gradient(
-    circle at 50% 150%,
-    white,
-    transparent
-  )`;
+import { ReactNode, useRef, PointerEvent, HTMLAttributes } from "react";
+import cn from "classnames";
 
-interface CardWrapperProps {
+interface CardWrapperProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  className?: string;
+  /** Show the cursor-following glow on hover */
+  spotlight?: boolean;
 }
 
-export default function CardWrapper({ children }: CardWrapperProps) {
-  const { resolvedTheme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
+/**
+ * Base surface for every tile in the bento grid.
+ * Glassy surface, hairline border, and a soft spotlight that follows the cursor.
+ */
+export default function CardWrapper({
+  children,
+  className,
+  spotlight = true,
+  ...rest
+}: CardWrapperProps) {
+  const ref = useRef<HTMLDivElement>(null);
 
-  // Ensures theme is mounted before rendering
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    // Fallback to avoid mismatch during hydration
-    return <div className="group w-full h-full relative overflow-hidden rounded-3xl p-px bg-white/60"></div>;
-  }
+  const onPointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  };
 
   return (
-    <div className="group w-full h-full relative overflow-hidden rounded-3xl p-px dark:bg-white/10 bg-white/60">
-      {resolvedTheme === "dark" && (
-        <>
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                radial-gradient(
-                  circle at 50% 150%,
-                  #208de52b,
-                  transparent
-                )`,
-            }}
-          />
-          <div
-            className="shine absolute -inset-2 opacity-40 blur-md z-10"
-            style={{
-              maskImage: shineMaskImage,
-              WebkitMaskImage: shineMaskImage,
-              backgroundImage: `
-                conic-gradient(
-                  from -45deg at 50% 150%,
-                  transparent 0deg,
-                  #10071e 15deg,
-                  transparent 30deg,
-                  #10071e 45deg,
-                  transparent 60deg,
-                  #10071e 75deg,
-                  transparent 90deg
-                )`,
-            }}
-          />
-          <div className="absolute inset-px rounded-3xl bg-zinc-950/70 transition-colors duration-300 group-hover:bg-black/75" />
-        </>
+    <div
+      ref={ref}
+      onPointerMove={spotlight ? onPointerMove : undefined}
+      className={cn(
+        "group relative h-full w-full overflow-hidden rounded-[28px]",
+        "border border-[var(--border)] bg-[var(--surface)] backdrop-blur-xl",
+        "shadow-[0_1px_0_0_rgba(255,255,255,0.04)_inset,0_10px_30px_-12px_rgba(0,0,0,0.25)]",
+        "transition-[border-color,background-color,transform,box-shadow] duration-500 ease-out",
+        "hover:border-[var(--border-strong)] hover:bg-[var(--surface-hover)]",
+        className
       )}
-      {resolvedTheme === "light" && (
-        <>
-          <div className="absolute inset-px rounded-3xl bg-white/5 transition-colors duration-300 group-hover:bg-white/70" />
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                radial-gradient(
-                  80% 6% at 50% 103%,
-                  #6f38fc44,
-                  transparent
-                )
-              `,
-            }}
-          />
-        </>
+      {...rest}
+    >
+      {spotlight && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{
+            background:
+              "radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--spotlight), transparent 45%)",
+          }}
+        />
       )}
-
-      <div className="relative h-full">{children}</div>
+      <div className="relative z-[1] h-full">{children}</div>
     </div>
   );
 }

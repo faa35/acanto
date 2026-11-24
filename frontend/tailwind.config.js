@@ -17,7 +17,10 @@ module.exports = {
         to: "hsla(0, 0%, 100%, 0.05)"
       },
       fontFamily: {
-        silka: ["var(--font-silka)"]
+        silka: ["var(--font-silka)", ...defaultTheme.fontFamily.sans],
+        serif: ["var(--font-serif)", ...defaultTheme.fontFamily.serif],
+        pixel: ["var(--font-pixel)", ...defaultTheme.fontFamily.mono],
+        code: ["var(--font-code)", ...defaultTheme.fontFamily.mono],
       },
       boxShadow: {
         memoji: "inset 1px 4px 6px rgba(0,0,0,.4), inset 0px -2px 16px -3px rgba(0,0,0,.2)",
@@ -32,6 +35,8 @@ module.exports = {
         eclipse: "eclipse 3s linear infinite",
         marquee: "marquee 8s linear infinite",
         "god-rays": "god-rays var(--duration) cubic-bezier(0.15, 0, 0.85, 1) infinite alternate",
+        "spin-slow": "spin 6s linear infinite",
+        "pulse-ring": "pulse-ring 2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite",
       },
       keyframes: {
         eclipse: {
@@ -58,6 +63,10 @@ module.exports = {
             transform: "translateX(-50%)",
           },
         },
+        "pulse-ring": {
+          "0%": { transform: "scale(1)", opacity: "0.6" },
+          "100%": { transform: "scale(2.4)", opacity: "0" },
+        },
       },
       gridTemplateColumns: {
         "1-64": "repeat(1, minmax(64px, 1fr))",
@@ -71,4 +80,3 @@ module.exports = {
   },
   plugins: [],
 }
-

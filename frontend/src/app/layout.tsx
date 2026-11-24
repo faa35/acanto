@@ -1,10 +1,10 @@
 // D:\Fall 24\my website\personalweb\frontend\src\app\layout.tsx
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.scss";
-import { silka } from "@/fonts";
+import { silka, instrumentSerif, silkscreen, jetbrainsMono } from "@/fonts";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
@@ -30,6 +30,15 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#07070b" },
+    { media: "(prefers-color-scheme: light)", color: "#f3f1ec" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,31 +46,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${silka.className}`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>    {/* defaultTheme="dark" enableSystem={true} */}
-          <div style={{
-            flex: "none",
-            height: "100%",
-            left: "calc(50.00000000000002% - 100% / 2)",
-            pointerEvents: "none",
-            position: "fixed",
-            top: "0",
-            width: "100%",
-            zIndex: "4",
-          }}>
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                backgroundSize: "64px",
-                backgroundRepeat: "repeat",
-                backgroundImage: "url(/Static.png)",
-                opacity: "0.06",
-                borderRadius: "0px",
-              }}
-            />
+      <body
+        className={`${silka.className} ${silka.variable} ${instrumentSerif.variable} ${silkscreen.variable} ${jetbrainsMono.variable}`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
+          {/* Ambient background: soft drifting color + faint grid + grain */}
+          <div className="ambient" aria-hidden>
+            <div className="blob blob-1" />
+            <div className="blob blob-2" />
+            <div className="blob blob-3" />
+            <div className="ambient-grid" />
+            <div className="noise" />
           </div>
-          {children}
+          <div className="relative z-[1]">{children}</div>
         </ThemeProvider>
         <SpeedInsights />
         <Analytics />

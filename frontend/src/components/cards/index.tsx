@@ -2,7 +2,9 @@
 export { default as CardWrapper } from "./card-wrapper";
 export { default as MapCard } from "./map-card";
 export { default as ResumeCard } from "./resume-card";
-export { default as IconCard } from "./icon-card";
+export { default as IconCard, GithubCard } from "./icon-card";
+export { default as ToolsCard } from "./stack-card";
+export { default as ProjectsCard } from "./projects-card";
 export { default as LastfmCard } from "./lastfm";
 export { default as AboutCard } from "./about-card";
 export { default as DiscordCard } from "./disord-card";

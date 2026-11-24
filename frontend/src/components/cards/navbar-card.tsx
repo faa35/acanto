@@ -1,77 +1,64 @@
+"use client";
+
 import Link from "next/link";
+import cn from "classnames";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
+];
 
 const NavBarCard = () => {
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <div className="navbar-container">
-      <div className="navbar flex justify-end items-center px-6 py-4">
-        <button className={`nav-button ${pathname === "/" ? "active" : ""}`}>
-          <Link href="/">Home</Link>
-        </button>
-        <button className={`nav-button ${pathname === "/projects" ? "active" : ""}`}>
-          <Link href="/projects">Projects</Link>
-        </button>
-      </div>
-      <style jsx>{`
-        .navbar-container {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          z-index: 999;
-          backdrop-filter: blur(100px);
-          -webkit-backdrop-filter: blur(100px);
-          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-        }
-        .navbar {
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          padding: 12px 320px;
-        }
-        .nav-button {
-          position: relative;
-          padding: 10px 20px;
-          font-size: 16px;
-          font-weight: bold;
-          color: #fff;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          border-radius: 4px;
-          transition: color 0.3s ease;
-          margin-left: 16px;
-        }
-        .nav-button.active {
-          color: #fff;
-        }
-        .nav-button.active::after {
-          content: "";
-          position: absolute;
-          bottom: -4px; /* Slightly lower for distinction */
-          left: 0;
-          width: 100%; /* Full width */
-          height: 4px; /* Wider line for active state */
-          background-color: #fff;
-        }
-        .nav-button::after {
-          content: "";
-          position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background-color: #fff;
-          transition: width 0.3s ease, height 0.3s ease;
-        }
-        .nav-button:hover::after {
-          width: 100%;
-          height: 2px; /* Hover line remains thinner */
-        }
-      `}</style>
-    </div>
+    <header className="fixed inset-x-0 top-0 z-[60] flex justify-center px-4 pt-4">
+      <nav
+        className={cn(
+          "flex w-full max-w-[1240px] items-center justify-between rounded-full border px-2 py-2 transition-all duration-500",
+          scrolled
+            ? "border-[var(--border)] bg-[var(--surface)] shadow-[0_10px_30px_-15px_rgba(0,0,0,0.4)] backdrop-blur-xl"
+            : "border-transparent bg-transparent"
+        )}
+      >
+        <Link href="/" className="flex items-center gap-2.5 pl-1.5 pr-3" aria-label="Home">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--text)] font-serif text-[18px] italic text-[var(--bg)]">
+            fa
+          </span>
+          <span className="hidden text-[14px] font-semibold text-[var(--text)] sm:block">Fardin Abdulla</span>
+        </Link>
+
+        <div className="flex items-center gap-1 rounded-full border border-[var(--border)] bg-[var(--surface)] p-1 backdrop-blur-xl">
+          {LINKS.map((l) => {
+            const active = l.href === "/" ? pathname === "/" : pathname?.startsWith(l.href);
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={cn(
+                  "rounded-full px-4 py-1.5 text-[13px] font-medium transition-colors duration-300",
+                  active
+                    ? "bg-[var(--text)] text-[var(--bg)]"
+                    : "text-[var(--muted)] hover:text-[var(--text)]"
+                )}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
+    </header>
   );
 };
 

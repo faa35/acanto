@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { Instrument_Serif, JetBrains_Mono, Silkscreen } from "next/font/google";
 
 export const silka = localFont({
   preload: true,
@@ -46,3 +47,28 @@ export const silka = localFont({
     },
   ],
 })
+
+// Accent serif for headlines / song titles
+export const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+// Code font for the GitHub card's background snippet (ligatures on)
+export const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-code",
+  display: "swap",
+});
+
+// Pixel font used by the Discord display-name style on the profile
+export const silkscreen = Silkscreen({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-pixel",
+  display: "swap",
+});

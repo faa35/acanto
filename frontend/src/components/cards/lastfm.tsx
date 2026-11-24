@@ -1,106 +1,177 @@
+"use client";
 
-import CardWrapper from "@/components/cards/card-wrapper"; // Import CardWrapper
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import CardWrapper from "@/components/cards/card-wrapper";
+import React, { CSSProperties, useEffect, useState } from "react";
+import cn from "classnames";
 import { FaSpotify } from "react-icons/fa";
-import SendmessageIcon from "../lottie-ui/send-message"; // Assuming you have this component available
-import { useTheme } from "next-themes"; // Import to manage theme
+import { useActive } from "@/lib/use-active";
+import { SideFigure } from "@/components/figures";
+import SendmessageIcon from "@/components/lottie-ui/send-message";
+
+interface Song {
+  songName: string;
+  artistName: string;
+  albumName: string;
+  albumArtUrl: string;
+  trackUrl: string;
+  isNowPlaying: boolean;
+  playedAt: number | null;
+}
+
+function timeAgo(ts: number) {
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 60) return "just now";
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
+}
+
+function Equalizer({ playing }: { playing: boolean }) {
+  return (
+    <span className="flex h-3 items-end gap-[2px]" aria-hidden>
+      {[0.9, 0.6, 1.1, 0.75].map((dur, i) => (
+        <span
+          key={i}
+          className="eq-bar w-[3px] rounded-full bg-[#1db954]"
+          style={
+            {
+              height: "100%",
+              animationDuration: `${dur}s`,
+              animationPlayState: playing ? "running" : "paused",
+              transform: playing ? undefined : `scaleY(${[0.4, 0.7, 0.3, 0.55][i]})`,
+            } as CSSProperties
+          }
+        />
+      ))}
+    </span>
+  );
+}
+
+// Wide box (desktop / tablet) = album on the left, text on the right.
+// Narrow box (phone) = album on top, text underneath.
+// (Tailwind needs the full class names written out, hence the long `[@container(min-width:480px)]:` prefixes.)
 
 const LastfmCard = () => {
-  const [lastFmDetails, setLastFmDetails] = useState({
-    lastFmApiKey: "",
-    lastFmUsername: "",
-  });
-
-  const [songData, setSongData] = useState({
-    songName: "",
-    artistName: "",
-    albumArtUrl: "",
-    isNowPlaying: false,
-  });
-
-  const { resolvedTheme } = useTheme(); // Get current theme (light or dark)
+  const { ref, active, handlers } = useActive<HTMLDivElement>();
+  const [username, setUsername] = useState("acanto7");
+  const [song, setSong] = useState<Song | null>(null);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    // Fetch Last.fm API Key and Username from the backend
-    axios
-      .get("https://journey-genie-v2.onrender.com/api/details")    // http://localhost:8080/api/details
-      .then((response) => {
-        const { lastFmApiKey, lastFmUsername } = response.data;
-        setLastFmDetails({ lastFmApiKey, lastFmUsername });
-
-        // Fetch the last played song using the Last.fm API
-        return axios.get(
-          `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${lastFmUsername}&api_key=${lastFmApiKey}&format=json`
-        );
-      })
-      .then((response) => {
-        const track = response.data.recenttracks.track[0];
-        const isNowPlaying = track["@attr"]?.nowplaying === "true";
-        const songName = track.name;
-        const artistName = track.artist["#text"];
-        const albumArtUrl = track.image[3]["#text"] || "";
-
-        setSongData({ songName, artistName, albumArtUrl, isNowPlaying });
-      })
-      .catch((error) => {
-        console.error("Error fetching Last.fm data:", error);
-      });
+    let cancelled = false;
+    // Key stays on the server: see src/app/api/lastfm/route.ts
+    const load = () =>
+      fetch("/api/lastfm")
+        .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+        .then((data) => {
+          if (cancelled) return;
+          setUsername(data.username);
+          if (data.track) setSong(data.track);
+          setFailed(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching Last.fm data:", error);
+          if (!cancelled) setFailed(true);
+        });
+    load();
+    const id = setInterval(load, 60_000);
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
   }, []);
 
+  const playing = !!song?.isNowPlaying || active;
+
   return (
-    <CardWrapper>
-      {/* Card Wrapper ensures the outer container styling */}
-      <div className="text-white rounded-3xl p-8 h-full flex flex-col lg:flex-row gap-8 justify-between relative shadow-lg">
-        {/* Spotify Icon */}
-        <div className={`absolute top-3 right-3 p-3 rounded-full shadow-md ${resolvedTheme === "dark" ? "bg-[#291e40]" : "bg-[#b0b5bf]"}`}>
-          <FaSpotify size={40} className={resolvedTheme === "dark" ? "text-green" : "text-black"}  />
-        </div>
+    <CardWrapper className="media-card">
+      <div ref={ref} {...handlers} className="h-full w-full [container-type:size]">
+        <div className="relative flex h-full flex-col p-5 [@container(min-width:480px)]:flex-row [@container(min-width:480px)]:gap-16 [@container(min-width:480px)]:p-7">
+          {/* ---------- album cover (big, like the original card) ---------- */}
+          <div className="relative aspect-square w-[min(58cqw,44cqh)] shrink-0 self-start [@container(min-width:480px)]:w-[min(48cqw,calc(100cqh-56px))]">
+            {/* cover (stays still) */}
+            <div
+              className={cn(
+                "media-muted relative h-full w-full overflow-hidden rounded-3xl border border-[var(--border)] shadow-[0_12px_30px_-12px_rgba(0,0,0,0.5)]"
+              )}
+            >
+              {song?.albumArtUrl ? (
+                <img src={song.albumArtUrl} alt={`${song.albumName || song.songName} cover`} className="h-full w-full object-cover" />
+              ) : (
+                <div
+                  className={cn(
+                    "flex h-full w-full items-center justify-center bg-[var(--bg-elevated)] bg-gradient-to-br from-[#1db954]/25 to-violet-500/25",
+                    !song && !failed && "animate-pulse"
+                  )}
+                >
+                  <FaSpotify className="h-10 w-10 text-[var(--muted)]" />
+                </div>
+              )}
+            </div>
+          </div>
 
-{/* bg-[#b0b5bf] */}
-                
-{/* for dark bg-[#e4d8b4] */}
+          {/* ---------- song info (right side on wide cards, under the cover on phones) ---------- */}
+          <div className="relative z-[2] mt-auto min-w-0 pr-14 [@container(min-width:480px)]:mt-0 [@container(min-width:480px)]:flex-1 [@container(min-width:480px)]:pr-0 [@container(min-width:480px)]:pt-16">
+            <p className="mb-1.5 flex items-center gap-2 text-[12px] font-medium text-[var(--muted)]">
+              <Equalizer playing={playing} />
+              {song?.isNowPlaying ? "Now playing" : "Last played"}
+              {song && !song.isNowPlaying && song.playedAt && <span className="opacity-70">· {timeAgo(song.playedAt)}</span>}
+            </p>
 
+            {song ? (
+              <>
+                <a
+                  href={song.trackUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block truncate font-serif text-[28px] leading-[1.08] text-[var(--text)] hover:underline [@container(min-width:480px)]:line-clamp-2 [@container(min-width:480px)]:whitespace-normal [@container(min-width:480px)]:text-[36px]"
+                  title={song.songName}
+                >
+                  {song.songName}
+                </a>
+                <p className="mt-1.5 truncate text-[13px] text-[var(--muted)] [@container(min-width:480px)]:text-[14px]">
+                  by <span className="font-medium text-[var(--text)]">{song.artistName}</span>
+                </p>
+                {song.albumName && (
+                  <p className="truncate text-[13px] text-[var(--muted)] [@container(min-width:480px)]:text-[14px]">
+                    on <span className="font-medium text-[var(--text)]">{song.albumName}</span>
+                  </p>
+                )}
+              </>
+            ) : failed ? (
+              <p className="font-serif text-[22px] leading-tight text-[var(--text)]">Music is taking a break</p>
+            ) : (
+              <div className="flex flex-col gap-2 pt-1">
+                <span className="h-6 w-3/4 animate-pulse rounded-md bg-[var(--border-strong)]" />
+                <span className="h-3 w-1/2 animate-pulse rounded bg-[var(--border)]" />
+                <span className="h-3 w-2/3 animate-pulse rounded bg-[var(--border)]" />
+              </div>
+            )}
+          </div>
 
-        {/* Last Played Track */}
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-          {/* Larger Album Art */}
-          <img
-            src={songData.albumArtUrl || "/default-album-art.jpg"}
-            alt="Track Cover"
-            className="ml-[-15px] w-64 h-64 lg:w-80 lg:h-80 rounded-3xl border border-gray-700 "
+          {/* ---------- Spotify logo (top-right, like the original) ---------- */}
+          <span
+            title="Spotify"
+            className="absolute right-5 top-5 z-[3] flex h-12 w-12 items-center justify-center rounded-full bg-[var(--chip)] text-[var(--chip-fg)] shadow-md [@container(min-width:480px)]:right-6 [@container(min-width:480px)]:top-6"
+          >
+            <FaSpotify className="h-7 w-7" />
+          </span>
 
+          {/* ---------- figure: pops up under the song name when hovered ---------- */}
+          <SideFigure
+            active={active}
+            className="right-0 top-[22%] h-[130px] w-[81px] [@container(min-width:480px)]:top-[52%] [@container(min-width:480px)]:h-[160px] [@container(min-width:480px)]:w-[100px]"
           />
 
-          {/* Song Info */}
-          <div className="lg:ml-0 mt-8">
-            <p className="text-yellow-400 text-base mb-2 flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-yellow-400 animate-pulse"></span>
-              {songData.isNowPlaying ? "Now Playing..." : "Last played..."}
-            </p>
-            <h2 className="text-2xl lg:text-3xl font-bold leading-tight mb-2">
-              {songData.songName || "Unknown Song"}
-            </h2>
-            <p className="font-bold  text-xl">
-              <span className="font-normal text-gray-300">by </span>
-              {songData.artistName || "Unknown Artist"}
-            </p>
-          </div>
-        </div>
-
-        {/* External Link Button using SendmessageIcon */}
-        {/* <div
-          className="absolute bottom-4 right-4 flex items-center justify-center p-1 rounded-full transition-all duration-300
-            bg-yellow-400 text-black hover:ring-2 hover:ring-yellow-500"
-        > */}
-        <div
-          className="absolute bottom-4 right-4 flex items-center justify-center p-1 rounded-full transition-all duration-300
-            "
-        >
           <SendmessageIcon
-            link={`https://www.last.fm/user/${lastFmDetails.lastFmUsername}`}
-            lottieName="SendMessageIconLastfm" // Ensure that the lottieName is unique for each animation. This way, the animations will not overlap or interfere with one another.
-            
+            link={`https://www.last.fm/user/${username}`}
+            lottieName="SendMessageIconLastfm"
+            label="Open Last.fm profile"
+            active={active}
+            round
+            className="absolute bottom-5 right-5 [@container(min-width:480px)]:bottom-6 [@container(min-width:480px)]:right-6"
           />
         </div>
       </div>

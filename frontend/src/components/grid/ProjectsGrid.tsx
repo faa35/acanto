@@ -98,7 +98,7 @@ const Grid = () => {
 					}}
         >
 					<BlurFade delay={0.55}>
-						<ThemeToggle />
+						<ThemeToggle compact />
 					</BlurFade>
 				</div>
 

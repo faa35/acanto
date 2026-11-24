@@ -40,12 +40,12 @@ export const layouts = {
       },
       {
         i: "linkedin",
-        x: 3, y: 13.7, w: 3, h: 2.6,
+        x: 3, y: 13.0, w: 3, h: 3.3,
         isResizable: false,
       },
       {
         i: "lastfm",
-        x: 9, y: 8.0, w: 6, h: 5.7,
+        x: 9, y: 8.0, w: 6, h: 5.0,
         isResizable: false,
       },
       {
@@ -55,17 +55,17 @@ export const layouts = {
       },
       {
         i: "codepen",
-        x: 9, y: 13.7, w: 3, h: 2.6,
+        x: 9, y: 13.0, w: 3, h: 3.3,
         isResizable: false,
       },
       {
         i: "email",
-        x: 6, y: 13.7, w: 3, h: 2.6,
+        x: 6, y: 13.0, w: 3, h: 3.3,
         isResizable: false,
       },
       {
         i: "discord",
-        x: 3, y: 8.0, w: 3, h: 5.7,
+        x: 3, y: 8.0, w: 3, h: 5.0,
         isResizable: false,
       },
 
@@ -178,34 +178,34 @@ export const layouts = {
       },
       {
         i: "discord",
-        x: 0, y: 18, w: 4, h: 10,
+        x: 0, y: 18, w: 4, h: 8.3,
         isResizable: false,
       },
       {
         i: "chat-card-2",
-        x: 0, y: 28, w: 1.7, h: 7.5,
+        x: 0, y: 26.3, w: 1.7, h: 8.5,
         isResizable: false,
       },
       {
         i: "linkedin",
-        x: 1.7, y: 28, w: 2.3, h: 3.75,
+        x: 1.7, y: 26.3, w: 2.3, h: 4.25,
         isResizable: false,
       },
       {
         i: "codepen",
-        x: 1.7, y: 31.75, w: 2.3, h: 3.75,
+        x: 1.7, y: 30.55, w: 2.3, h: 4.25,
         isResizable: false,
       },
       {
         i: "lastfm",
-        x: 0, y: 35.5, w: 4, h: 11,
+        x: 0, y: 34.8, w: 4, h: 9.6,
         isResizable: false,
       },
 
 
       {
         i: "email",
-        x: 1.7, y: 46.5, w: 4, h: 2.5,
+        x: 1.7, y: 44.4, w: 4, h: 3.5,
         isResizable: false,
       },
 

@@ -14,20 +14,6 @@ type Message = {
   timestamp?: Date;
 };
 
-const resumeContent = `
-Machine Learning Project
-- Technologies: Python, NumPy
-
-JourneyGenie Web App
-- Technologies: Spring Boot, JavaScript, PostgreSQL, Bootstrap, MockMvc, JUnit, Docker
-
-Collision-Resistant Hashmap for FriendsBook - Social Networking Platform
-- Technologies: C++, Object-Oriented Programming, Data Structures
-
-Personal Portfolio Web App
-- Technologies: Next.js, React, TypeScript, Tailwind CSS
-`;
-
 const AiChatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -35,47 +21,11 @@ const AiChatbot: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const chatContentRef = useRef<HTMLDivElement>(null);
 
-  const fetchApiKey = async (): Promise<string | null> => {
-    try {
-      const response = await axios.get("https://journey-genie-v2.onrender.com/api/details");
-      return response.data.openaiApiKey || null;
-    } catch (error) {
-      console.error("Error fetching API key:", error);
-      return null;
-    }
-  };
-
+  // The OpenAI key lives on the server (see src/app/api/chat/route.ts)
   const generateContent = async (prompt: string) => {
     try {
-      const apiKey = await fetchApiKey();
-      if (!apiKey) {
-        throw new Error("API key not available");
-      }
-
-      const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          model: "gpt-3.5-turbo-0125",
-          messages: [
-            {
-              role: "system",
-              content: `You are a chatbot assisting users with questions about the person described in this resume. 
-              Always respond in 3 lines or less. Use this resume:\n\n${resumeContent}\n\n
-              If asked "Who are you?" reply "I am Fardin's personal assistant."
-              For questions about technologies, confirm if they were used in a listed project`,
-            },
-            { role: "user", content: prompt },
-          ],
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${apiKey}`,
-          },
-        }
-      );
-
-      return response.data.choices[0].message.content;
+      const response = await axios.post("/api/chat", { message: prompt });
+      return response.data.reply || "Sorry, I couldn't come up with an answer.";
     } catch (error) {
       console.error("Error generating content:", error);
       return "Sorry, I encountered an error generating a response.";
@@ -163,7 +113,7 @@ const AiChatbot: React.FC = () => {
         <LottiePlayer
           animationData={require("../../lottie/aichat/blep.json")}
           loop
-          className="w-24 h-24"
+          className="w-16 h-16 sm:w-24 sm:h-24"
         />
       </div>
 
