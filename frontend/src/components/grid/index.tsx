@@ -13,14 +13,13 @@ import {
 	GithubCard,
 	ChatCard,
 	ToolsCard,
-	SiuuCard,
 } from "@/components/cards";
 
 // Arrangement mirrors the old site: wide intro, square tiles, two tall blank boxes.
 const TILES: { area: string; delay: number; node: ReactNode }[] = [
 	{ area: "about", delay: 0.02, node: <AboutCard /> },
 	{ area: "resume", delay: 0.06, node: <ResumeCard /> },
-	{ area: "empty1", delay: 0.1, node: <SiuuCard /> },
+	{ area: "empty1", delay: 0.1, node: <ChatCard /> },
 	{ area: "discord", delay: 0.14, node: <DiscordCard /> },
 	{ area: "map", delay: 0.18, node: <MapCard /> },
 	{ area: "empty2", delay: 0.22, node: <ChatCard /> },

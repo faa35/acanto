@@ -4,7 +4,6 @@ export { default as MapCard } from "./map-card";
 export { default as ResumeCard } from "./resume-card";
 export { default as IconCard, GithubCard } from "./icon-card";
 export { default as ToolsCard } from "./stack-card";
-export { default as SiuuCard } from "./siuu-card";
 export { default as ProjectsCard } from "./projects-card";
 export { default as LastfmCard } from "./lastfm";
 export { default as AboutCard } from "./about-card";

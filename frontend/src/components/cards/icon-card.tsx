@@ -4,7 +4,6 @@ import cn from "classnames";
 import { IconType } from "react-icons";
 import { FaGithub, FaInstagram } from "react-icons/fa";
 import CardWrapper from "./card-wrapper";
-import { PeekFigure, PeekProp } from "@/components/figures";
 import { useActive } from "@/lib/use-active";
 
 /** The original LinkedIn line icon from the old site, drawn in the theme colour. */
@@ -21,22 +20,34 @@ function LinkedinLine({ className }: { className?: string }) {
 
 /**
  * Social boxes (same sizes as the original layout): big logo in the middle.
- * GitHub also gets the line-art figure and the code sheet on hover.
+ * GitHub also shows a faint sheet of code when hovered.
+ * LinkedIn and Instagram light up in their real brand colours, with a soft glow behind, when hovered.
  */
 
+type Brand = "linkedin" | "instagram" | null;
+
 const SOCIALS = {
-  // GitHub: smaller, tilted, popping up from the bottom-left corner (like the drawing)
-  Github: {
-    label: "GitHub",
-    Icon: FaGithub,
-    prop: "laptop",
-    logo: "top-[49%] h-[38%] max-h-[110px]",
-    figure: "left-[1.5%] h-[31%] max-h-[86px] origin-bottom-left rotate-[8deg]",
-    pop: true,
-  },
-  Linkedin: { label: "LinkedIn", Icon: LinkedinLine, prop: null, logo: "top-[49%] h-[42%] max-h-[122px]", figure: "", pop: false },
-  Instagram: { label: "Instagram", Icon: FaInstagram, prop: null, logo: "top-[49%] h-[39%] max-h-[113px]", figure: "", pop: false },
-} satisfies Record<string, { label: string; Icon: IconType; prop: PeekProp | null; logo: string; figure: string; pop: boolean }>;
+  Github: { label: "GitHub", Icon: FaGithub, logo: "top-[49%] h-[38%] max-h-[110px]", brand: null },
+  Linkedin: { label: "LinkedIn", Icon: LinkedinLine, logo: "top-[49%] h-[42%] max-h-[122px]", brand: "linkedin" },
+  Instagram: { label: "Instagram", Icon: FaInstagram, logo: "top-[49%] h-[39%] max-h-[113px]", brand: "instagram" },
+} satisfies Record<string, { label: string; Icon: IconType; logo: string; brand: Brand }>;
+
+/** Instagram's gradient, used to fill the logo (CSS: fill: url(#ig-brand)). */
+function InstagramGradient() {
+  return (
+    <svg width="0" height="0" className="absolute" aria-hidden focusable="false">
+      <defs>
+        <radialGradient id="ig-brand" cx="0.3" cy="1.07" r="1.5">
+          <stop offset="0" stopColor="#fdf497" />
+          <stop offset="0.05" stopColor="#fdf497" />
+          <stop offset="0.45" stopColor="#fd5949" />
+          <stop offset="0.6" stopColor="#d6249f" />
+          <stop offset="0.9" stopColor="#285aeb" />
+        </radialGradient>
+      </defs>
+    </svg>
+  );
+}
 
 export type SocialName = keyof typeof SOCIALS;
 
@@ -89,12 +100,23 @@ const IconCard = ({ title, link }: { title: SocialName; link: string }) => {
       >
         {title === "Github" && <CodeSheet active={active} />}
 
+        {s.brand === "instagram" && <InstagramGradient />}
+
         {/* big logo, always centred */}
         <span className={cn("absolute left-1/2 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center text-[var(--logo)]", s.logo)}>
-          <s.Icon className="h-full w-full" />
+          {s.brand && <span aria-hidden className={cn("brand-glow", `brand-glow-${s.brand}`, active && "is-on")} />}
+          <s.Icon className={cn("relative h-full w-full transition-opacity duration-500", s.brand && active && "opacity-0")} />
+          {s.brand && (
+            <s.Icon
+              aria-hidden
+              className={cn(
+                "brand-icon absolute inset-0 h-full w-full transition-opacity duration-500",
+                `brand-icon-${s.brand}`,
+                active ? "opacity-100" : "opacity-0"
+              )}
+            />
+          )}
         </span>
-
-        {s.prop && <PeekFigure prop={s.prop} active={active} pop={s.pop} className={cn("-bottom-2 aspect-[6/5]", s.figure)} />}
       </a>
     </CardWrapper>
   );

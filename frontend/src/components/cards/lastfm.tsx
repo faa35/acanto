@@ -5,7 +5,7 @@ import React, { CSSProperties, useEffect, useState } from "react";
 import cn from "classnames";
 import { FaSpotify } from "react-icons/fa";
 import { useActive } from "@/lib/use-active";
-import { SideFigure } from "@/components/figures";
+import MusicNotes from "./music-notes";
 
 interface Song {
   songName: string;
@@ -47,7 +47,6 @@ function Equalizer({ playing, green }: { playing: boolean; green: boolean }) {
     </span>
   );
 }
-
 
 const LastfmCard = () => {
   const { ref, active, handlers } = useActive<HTMLDivElement>();
@@ -157,11 +156,8 @@ const LastfmCard = () => {
             />
           </a>
 
-          {/* ---------- figure: sits in the bottom-right corner, puts on headphones when hovered ---------- */}
-          <SideFigure
-            active={active}
-            className="-bottom-14 right-0 h-[200px] w-[125px] [@container(min-height:360px)]:-bottom-10 [@container(min-height:360px)]:h-[180px] [@container(min-height:360px)]:w-[112px]"
-          />
+          {/* ---------- music signs floating up from the bottom-right corner (draggable) ---------- */}
+          <MusicNotes active={active} />
         </div>
       </div>
     </CardWrapper>
