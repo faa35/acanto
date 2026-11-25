@@ -54,8 +54,8 @@ const ToolsCard = () => {
     <CardWrapper>
       <div className="h-full w-full [container-type:size]">
         <div
-          // short box: 8 x 2 icons; taller box: 5 x 3 bigger icons
-          className="flex h-full flex-col justify-center gap-[clamp(6px,6cqh,14px)] px-5 py-3 [--cols:8] [--rows:2] [@container(min-height:200px)]:[--cols:5] [@container(min-height:200px)]:[--rows:3]"
+          // short box: 8 x 2 icons; taller box: 5 x 3; narrow (phone) box: 4 x 4
+          className="flex h-full flex-col justify-center gap-[clamp(6px,6cqh,14px)] px-5 py-3 [--cols:8] [--rows:2] [@container(min-height:200px)]:[--cols:5] [@container(min-height:200px)]:[--rows:3] [@container(max-width:220px)]:[--cols:4] [@container(max-width:220px)]:[--rows:4]"
           style={
             {
               // icon size: fit whichever of width / height is tighter (gap = 0.6 x icon)

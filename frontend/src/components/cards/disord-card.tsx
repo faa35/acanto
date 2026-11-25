@@ -4,7 +4,6 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import cn from "classnames";
 import { FaDiscord } from "react-icons/fa";
 import { useActive, useNearViewport } from "@/lib/use-active";
-import SendmessageIcon from "@/components/lottie-ui/send-message";
 
 /* ------------------------------------------------------------------ */
 /* Config + snapshot of the profile (so the card paints instantly and */
@@ -12,6 +11,7 @@ import SendmessageIcon from "@/components/lottie-ui/send-message";
 /* ------------------------------------------------------------------ */
 
 const DISCORD_ID = process.env.NEXT_PUBLIC_DISCORD_USER_ID || "760451623474036766";
+const PROFILE_URL = `https://discord.com/users/${DISCORD_ID}`;
 
 // Colours follow the site's light/dark theme (see globals.scss)
 const C = {
@@ -35,7 +35,6 @@ const SNAPSHOT = {
   guildTag: "PRX",
   guildBadge: "/discord/guild-tag.png",
   bannerColor: "#29a3b3",
-  bio: "I wish",
 };
 
 type Badge = { id: string; icon: string; description?: string };
@@ -234,7 +233,7 @@ function Controller({ className }: { className?: string }) {
 
 function Panel({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("rounded-lg px-3 py-2", className)} style={{ background: C.panel }}>
+    <div className={cn("px-2.5 py-2", className)} style={{ background: C.panel }}>
       {children}
     </div>
   );
@@ -260,7 +259,6 @@ const DiscordCard = () => {
     activities: [],
     spotify: null,
   });
-  const [bio, setBio] = useState(SNAPSHOT.bio);
   const [badges, setBadges] = useState<Badge[]>([...EXTRA_BADGES, ...KNOWN_BADGES]);
   const [now, setNow] = useState(() => Date.now());
   const [showAllBadges, setShowAllBadges] = useState(false);
@@ -315,13 +313,12 @@ const DiscordCard = () => {
     };
   }, []);
 
-  /* ---------- profile extras (bio, badges) ---------- */
+  /* ---------- profile extras (badges) ---------- */
   useEffect(() => {
     fetch(`https://dcdn.dstn.to/profile/${DISCORD_ID}`)
       .then((r) => (r.ok ? r.json() : null))
       .then((p) => {
         if (!p) return;
-        if (typeof p.user_profile?.bio === "string") setBio(p.user_profile.bio);
         if (Array.isArray(p.badges) && p.badges.length) {
           setBadges([
             ...EXTRA_BADGES,
@@ -393,6 +390,10 @@ const DiscordCard = () => {
   const visibleBadges = showAllBadges ? badges : badges.slice(0, MAX_VISIBLE_BADGES);
   const hiddenCount = badges.length - MAX_VISIBLE_BADGES;
 
+  const label = activity
+    ? `${SECTION_LABEL[activity.type] ?? "Playing"}${activity.type === 2 ? ` ${activity.name}` : ""}`
+    : "Member since";
+
   return (
     <div
       ref={(el) => {
@@ -400,44 +401,37 @@ const DiscordCard = () => {
         (nearRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
       }}
       {...handlers}
-      className={cn(
-        "media-card relative h-full w-full overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--surface)] backdrop-blur-xl transition-[border-color,box-shadow] duration-500 hover:border-[var(--border-strong)]",
-        "shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)]",
-        active && "shadow-[0_20px_60px_-20px_rgba(41,163,179,0.45)]"
-      )}
-      style={{ fontFamily: '"gg sans","Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif' }}
+      className="media-card relative h-full w-full overflow-hidden border-2 border-[var(--border)] bg-[var(--surface)] transition-colors duration-300 hover:border-[var(--border-strong)]"
     >
       {/* ---------- banner ---------- */}
-      <div className="relative h-[80px]">
+      <div className="relative h-[64px]">
         <div aria-hidden className="media-muted absolute inset-0" style={{ background: SNAPSHOT.bannerColor }} />
-        <span
-          title="Discord"
-          className="absolute right-3 top-3 z-30 flex h-11 w-11 items-center justify-center rounded-full bg-[var(--chip)] text-[var(--chip-fg)] shadow-md"
+        {/* Discord logo: opens the profile; turns into the real blurple logo while the card is hovered */}
+        <a
+          href={PROFILE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Open my Discord profile"
+          aria-label="Open my Discord profile"
+          className={cn(
+            "absolute right-2.5 top-2.5 z-30 flex h-9 w-9 origin-top-right items-center justify-center rounded-full transition-all duration-300",
+            active ? "scale-[1.3] bg-[#5865F2] text-white" : "bg-[var(--chip)] text-[var(--chip-fg)]"
+          )}
         >
-          <FaDiscord className="h-6 w-6" />
-        </span>
+          <FaDiscord className={cn("h-5 w-5 transition-transform duration-300", active && "scale-110")} />
+        </a>
       </div>
 
-      {/* paper plane: message me on Discord */}
-      <SendmessageIcon
-        link={`https://discord.com/users/${DISCORD_ID}`}
-        lottieName="SendMessageIconDiscord"
-        label="Message me on Discord"
-        active={active}
-        round
-        className="absolute right-3 top-[90px] z-30"
-      />
-
       {/* ---------- avatar + decoration ---------- */}
-      <div className="absolute left-[12px] top-[34px] z-20">
-        <div className="relative h-[92px] w-[92px] rounded-full p-[6px]" style={{ background: C.bg }}>
-          <img src={presence.avatar} alt="Discord avatar" className="media-muted h-[80px] w-[80px] rounded-full object-cover" />
+      <div className="absolute left-[10px] top-[24px] z-20">
+        <div className="relative h-[80px] w-[80px] rounded-full p-[4px]" style={{ background: C.bg }}>
+          <img src={presence.avatar} alt="Discord avatar" className="media-muted h-[72px] w-[72px] rounded-full object-cover" />
           {presence.decoration && (
             <img
               src={active && presence.decorationAnimated ? presence.decorationAnimated : presence.decoration}
               alt=""
               aria-hidden
-              className="media-muted pointer-events-none absolute left-1/2 top-1/2 h-[96px] w-[96px] max-w-none -translate-x-1/2 -translate-y-1/2"
+              className="media-muted pointer-events-none absolute left-1/2 top-1/2 h-[86px] w-[86px] max-w-none -translate-x-1/2 -translate-y-1/2"
             />
           )}
           <StatusDot status={presence.status} />
@@ -447,7 +441,7 @@ const DiscordCard = () => {
       {/* custom status bubble (only when one is set) */}
       {custom && (custom.state || custom.emoji) && (
         <div
-          className="absolute left-[110px] top-[88px] z-20 flex max-w-[calc(100%-176px)] items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-[12px] shadow-lg"
+          className="absolute left-[98px] top-[72px] z-20 flex max-w-[calc(100%-112px)] items-center gap-1.5 px-2 py-1 text-[12px]"
           style={{ background: C.panel, color: C.textSoft }}
         >
           {custom.emoji?.id ? (
@@ -464,24 +458,23 @@ const DiscordCard = () => {
       )}
 
       {/* ---------- body ---------- */}
-      <div className="relative z-10 flex flex-col gap-2 px-4 pb-2 pt-[50px]">
+      <div className="relative z-10 flex flex-col gap-1.5 px-3.5 pb-2 pt-[42px]">
         {/* names */}
         <div className="flex flex-col gap-0.5">
-          <h3
-            className="font-pixel text-[20px] font-bold uppercase leading-6 tracking-[0.02em]"
-            style={{ color: C.text }}
-          >
-            {presence.globalName}
+          <h3 className="font-pixel text-[18px] font-bold uppercase leading-[22px] tracking-[0.02em]" style={{ color: C.text }}>
+            <a href={PROFILE_URL} target="_blank" rel="noopener noreferrer" className="hover:underline" title="Open my Discord profile">
+              {presence.globalName}
+            </a>
           </h3>
-          <div className="flex flex-wrap items-center gap-2 text-[14px]" style={{ color: C.textSoft }}>
-            <span>{presence.username}</span>
+          <div className="flex flex-wrap items-center gap-1.5 text-[14px] leading-[18px]" style={{ color: C.textSoft }}>
+            <span>@{presence.username}</span>
             {presence.guildTag && (
               <span
-                className="inline-flex items-center gap-1 rounded-md px-1.5 py-[2px] text-[12px] font-semibold"
+                className="inline-flex items-center gap-1 px-1.5 text-[12px] font-semibold"
                 style={{ background: C.pill }}
                 title="Server Tag"
               >
-                {presence.guildBadge && <img src={presence.guildBadge} alt="" className="h-[14px] w-[14px]" />}
+                {presence.guildBadge && <img src={presence.guildBadge} alt="" className="h-[12px] w-[12px]" />}
                 {presence.guildTag}
               </span>
             )}
@@ -489,15 +482,12 @@ const DiscordCard = () => {
         </div>
 
         {/* badges */}
-        <div
-          className="media-muted flex w-fit max-w-full flex-wrap items-center gap-[3px] rounded-lg px-1.5 py-1"
-          style={{ background: C.pill }}
-        >
+        <div className="media-muted flex h-6 w-fit max-w-full items-center gap-[2px] px-1" style={{ background: C.pill }}>
           {visibleBadges.map((b) => (
-            <span key={b.id} className="group/badge relative flex h-[22px] w-[22px] items-center justify-center">
-              <img src={b.icon} alt={b.description ?? "Discord badge"} className="h-[20px] w-[20px] object-contain" />
+            <span key={b.id} className="group/badge relative flex h-5 w-5 items-center justify-center">
+              <img src={b.icon} alt={b.description ?? "Discord badge"} className="h-[18px] w-[18px] object-contain" />
               {b.description && (
-                <span className="pointer-events-none absolute bottom-full left-1/2 z-40 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#111214] px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-lg transition-opacity group-hover/badge:opacity-100">
+                <span className="pointer-events-none absolute bottom-full left-1/2 z-40 mb-2 -translate-x-1/2 whitespace-nowrap bg-[#111214] px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-lg transition-opacity group-hover/badge:opacity-100">
                   {b.description}
                 </span>
               )}
@@ -507,7 +497,7 @@ const DiscordCard = () => {
             <button
               type="button"
               onClick={() => setShowAllBadges(true)}
-              className="px-1 text-[13px] font-semibold transition-colors hover:text-white"
+              className="px-1 text-[12px] font-semibold transition-colors hover:text-[var(--text)]"
               style={{ color: C.textSoft }}
               aria-label={`Show ${hiddenCount} more badges`}
             >
@@ -516,81 +506,40 @@ const DiscordCard = () => {
           )}
         </div>
 
-        {/* bio */}
-        {bio && (
-          <p className="whitespace-pre-line text-[14px] leading-[18px]" style={{ color: C.textSoft }}>
-            {bio}
-          </p>
-        )}
-
-        {/* activity */}
-        {activity ? (
-          <Panel className="relative overflow-hidden pb-2.5">
-            <div className="mb-1.5 flex items-center justify-between">
-              <span className="text-[12px] font-semibold" style={{ color: C.textSoft }}>
-                {SECTION_LABEL[activity.type] ?? "Playing"}
-                {activity.type === 2 && ` ${activity.name}`}
+        {/* activity (or "member since" when idle) */}
+        <Panel className="flex items-center gap-2.5">
+          <div className="media-muted relative h-11 w-11 shrink-0 overflow-hidden">
+            {!activity ? (
+              <span className="flex h-full w-full items-center justify-center" style={{ background: C.pill, color: C.muted }}>
+                <FaDiscord className="h-5 w-5" />
               </span>
-              <span className="flex gap-[3px] pr-1" aria-hidden>
-                {[0, 1, 2].map((i) => (
-                  <span key={i} className="h-[3px] w-[3px] rounded-full" style={{ background: C.textSoft }} />
-                ))}
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="media-muted relative h-[52px] w-[52px] shrink-0 overflow-hidden rounded-[10px]">
-                {isSpotify ? (
-                  <img src={presence.spotify!.album_art_url} alt={presence.spotify!.album} className="h-full w-full object-cover" />
-                ) : activityImage(activity) ? (
-                  <img
-                    src={activityImage(activity)!}
-                    alt={activity.name}
-                    className="h-full w-full bg-[var(--pill)] object-contain p-1.5"
-                  />
-                ) : (
-                  <UnknownGameIcon />
-                )}
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-[14px] font-bold leading-[18px]" style={{ color: C.text }}>
-                  {isSpotify ? presence.spotify!.song : activity.name}
-                </p>
-                {(isSpotify ? presence.spotify!.artist : activity.details) && (
-                  <p className="truncate text-[12px] leading-4" style={{ color: C.textSoft }}>
-                    {isSpotify ? `by ${presence.spotify!.artist}` : activity.details}
-                  </p>
-                )}
-                {!isSpotify && activity.state && (
-                  <p className="truncate text-[12px] leading-4" style={{ color: C.textSoft }}>
-                    {activity.state}
-                  </p>
-                )}
-                {start && (
-                  <p
-                    className="mt-0.5 flex items-center gap-1 font-mono text-[13px] font-semibold leading-4"
-                    style={{ color: C.time }}
-                  >
-                    <Controller className="h-[14px] w-[14px]" />
-                    {formatElapsed(now - start)}
-                  </p>
-                )}
-              </div>
-            </div>
-          </Panel>
-        ) : (
-          <Panel className="relative overflow-hidden pb-2.5">
-            <span className="text-[12px] font-semibold" style={{ color: C.textSoft }}>
-              Member Since
-            </span>
-            <p className="mt-1 flex items-center gap-1.5 text-[14px]" style={{ color: C.textSoft }}>
-              <FaDiscord className="h-4 w-4" style={{ color: C.muted }} />
-              {memberSince(DISCORD_ID)}
+            ) : isSpotify ? (
+              <img src={presence.spotify!.album_art_url} alt={presence.spotify!.album} className="h-full w-full object-cover" />
+            ) : activityImage(activity) ? (
+              <img src={activityImage(activity)!} alt={activity.name} className="h-full w-full bg-[var(--pill)] object-contain p-1" />
+            ) : (
+              <UnknownGameIcon />
+            )}
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-[11px] leading-[14px]" style={{ color: C.muted }}>
+              {label}
             </p>
-            <p className="mt-0.5 text-[12px]" style={{ color: C.muted }}>
-              Not doing anything right now
+            <p className="truncate text-[14px] font-semibold leading-[17px]" style={{ color: C.text }}>
+              {!activity ? memberSince(DISCORD_ID) : isSpotify ? presence.spotify!.song : activity.name}
             </p>
-          </Panel>
-        )}
+            {activity && start ? (
+              <p className="flex items-center gap-1 font-mono text-[12px] font-semibold leading-[14px]" style={{ color: C.time }}>
+                <Controller className="h-3 w-3" />
+                {formatElapsed(now - start)}
+              </p>
+            ) : (
+              <p className="truncate text-[11px] leading-[14px]" style={{ color: C.muted }}>
+                {activity ? (isSpotify ? `by ${presence.spotify!.artist}` : activity.details ?? "") : "Not doing anything right now"}
+              </p>
+            )}
+          </div>
+        </Panel>
       </div>
 
       {/* ---------- profile effect overlay ---------- */}

@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FiArrowRight, FiClock, FiMapPin } from "react-icons/fi";
+import { FiClock, FiMapPin } from "react-icons/fi";
 import CardWrapper from "@/components/cards/card-wrapper";
+import SendmessageIcon from "@/components/lottie-ui/send-message";
 
 function useLocalTime(timeZone: string) {
   const [time, setTime] = useState<string | null>(null);
@@ -31,6 +32,8 @@ function Chip({ children }: { children: React.ReactNode }) {
  */
 const AboutCard = () => {
   const time = useLocalTime("America/Vancouver");
+  const [touchHover, setTouchHover] = useState(false);
+  const [projectsHover, setProjectsHover] = useState(false);
 
   return (
     <CardWrapper>
@@ -46,7 +49,7 @@ const AboutCard = () => {
             className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 animate-[spin_40s_linear_infinite] rounded-full border border-dashed border-[var(--border)] opacity-70"
           />
 
-          <div className="relative flex flex-wrap items-center gap-2 [@container(max-height:250px)]:hidden">
+          <div className="relative flex flex-wrap items-center gap-2 [@container(max-height:280px)]:hidden">
             <Chip>
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-emerald-400" />
@@ -78,16 +81,21 @@ const AboutCard = () => {
           <div className="relative flex flex-wrap gap-2.5 [@container(max-height:230px)]:hidden">
             <Link
               href="/projects"
-              className="group/btn inline-flex items-center gap-2 rounded-full bg-[var(--text)] px-5 py-2.5 text-[13px] font-semibold text-[var(--bg)] transition-transform duration-300 hover:-translate-y-0.5"
+              onMouseEnter={() => setProjectsHover(true)}
+              onMouseLeave={() => setProjectsHover(false)}
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--text)] py-2 pl-5 pr-3 text-[13px] font-semibold text-[var(--bg)] transition-transform duration-300 hover:-translate-y-0.5"
             >
               View projects
-              <FiArrowRight className="transition-transform duration-300 group-hover/btn:translate-x-1" />
+              <SendmessageIcon lottieName="SendMessageIconProjects" bare invert active={projectsHover} iconClassName="h-6 w-6" />
             </Link>
             <a
               href="mailto:abdullafardin2202@gmail.com"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] px-5 py-2.5 text-[13px] font-semibold text-[var(--text)] transition-colors duration-300 hover:bg-[var(--accent-soft)]"
+              onMouseEnter={() => setTouchHover(true)}
+              onMouseLeave={() => setTouchHover(false)}
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] py-2 pl-5 pr-3 text-[13px] font-semibold text-[var(--text)] transition-colors duration-300 hover:bg-[var(--accent-soft)]"
             >
               Get in touch
+              <SendmessageIcon lottieName="SendMessageIconTouch" bare active={touchHover} iconClassName="h-6 w-6" />
             </a>
           </div>
         </div>

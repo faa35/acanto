@@ -1,27 +1,93 @@
-/* Original react-grid-layout container (home + projects pages) */
+/* ------------------------------------------------------------------ */
+/* Home page grid (like the old site): 4 square columns on desktop,    */
+/* 3 on small laptops, 2 on phones.                                    */
+/* ------------------------------------------------------------------ */
+
+.homeWrap {
+  container-type: inline-size;
+}
+
+.home {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* square cells (never shorter than 256px so the Discord card fits) */
+  grid-auto-rows: max(256px, calc((100cqw - 48px) / 4));
+  grid-template-areas:
+    "about   about   resume  empty1"
+    "discord map     map     empty1"
+    "empty2  spotify spotify linkedin"
+    "empty2  github  tools   instagram";
+
+  @media (max-width: 1279px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: max(256px, calc((100cqw - 32px) / 3));
+    grid-template-areas:
+      "about   about    resume"
+      "discord map      map"
+      "spotify spotify  github"
+      "tools   linkedin instagram";
+  }
+
+  @media (max-width: 699px) {
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "about    about"
+      "resume   resume"
+      "discord  discord"
+      "map      map"
+      "spotify  spotify"
+      "github   tools"
+      "linkedin instagram";
+  }
+}
+
+.tile {
+  min-width: 0;
+  min-height: 0;
+
+  &[data-area="empty1"],
+  &[data-area="empty2"] {
+    @media (max-width: 1279px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 699px) {
+    min-height: 168px;
+
+    &[data-area="about"] {
+      min-height: 0;
+    }
+    &[data-area="resume"] {
+      min-height: 112px;
+    }
+    &[data-area="discord"] {
+      min-height: 260px;
+    }
+    &[data-area="spotify"] {
+      min-height: 400px;
+    }
+    &[data-area="map"] {
+      min-height: 260px;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Projects page (react-grid-layout)                                   */
+/* ------------------------------------------------------------------ */
 
 .container {
-  max-width: 1300px;
   position: relative;
-  margin: 140px auto 0 auto;
-
-  @media (max-width: 1200px) {
-    max-width: 1000px;
-  }
-
-  @media (max-width: 799px) {
-    max-width: 575px;
-    margin-top: 70px;
-  }
-
-  @media (max-width: 374px) {
-    margin-top: 70px;
-  }
+  /* the grid adds its own 16px gutter; pull it flush with the sidebar layout */
+  margin: -16px -16px 0;
 }
 
 .itemGrab {
   overflow: hidden;
-  border-radius: 28px;
   user-select: none;
 }
 

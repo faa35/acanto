@@ -10,7 +10,6 @@ export { default as AboutCard } from "./about-card";
 export { default as DiscordCard } from "./disord-card";
 export { default as TextMarqueeCard } from "./text-marquee-card";
 export { default as ChatCard } from "./chat-card";
-export { default as NavBarCard } from "./navbar-card";
 export { default as Footer } from "./footer";
 // export { default as ProjectCard} from "./project-card";
 export { default as AiChatButton} from "./aichat";

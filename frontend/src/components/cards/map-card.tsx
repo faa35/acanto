@@ -151,7 +151,7 @@ const MapCard = () => {
 
   return (
     <CardWrapper spotlight={false} className="media-card">
-      <div className="relative h-full w-full overflow-hidden rounded-[27px]">
+      <div className="relative h-full w-full overflow-hidden">
         {/* fallback shown until (or if) the 3D map loads */}
         <div aria-hidden className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,var(--accent-soft),transparent_60%)]">
           <div className="absolute inset-0 opacity-60 [background-image:linear-gradient(var(--grid-line-color)_1px,transparent_1px),linear-gradient(90deg,var(--grid-line-color)_1px,transparent_1px)] [background-size:28px_28px]" />

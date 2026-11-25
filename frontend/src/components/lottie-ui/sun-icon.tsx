@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 import SunAnimation from "../../lottie/sun/Sun.json";
 import SunLightAnimation from "../../lottie/sun/SunLight.json";
 
-const SunIcon = () => {
+const SunIcon = ({ name = "SunIcon" }: { name?: string }) => {
   const { resolvedTheme } = useTheme();
   const isLightMode = resolvedTheme === "light";
   const sunIconContainer = useRef<HTMLDivElement | null>(null);
@@ -15,7 +15,7 @@ const SunIcon = () => {
 
     if (!sunIconContainer.current) return;
     lot.default.loadAnimation({
-      name: "SunIcon",
+      name,
       renderer: "svg",
       loop: false,
       autoplay: false,
@@ -29,7 +29,7 @@ const SunIcon = () => {
 
   async function destroyLottie() {
     const lot = await import("lottie-web");
-    lot.default.destroy("SunIcon");
+    lot.default.destroy(name);
   }
 
   useEffect(() => {
@@ -38,16 +38,16 @@ const SunIcon = () => {
     return () => {
       destroyLottie();
     };
-  }, [isLightMode, resolvedTheme]);
+  }, [isLightMode, resolvedTheme, name]);
 
   const lottieHover = async () => {
     const lot = await import("lottie-web");
-    lot.default.play("SunIcon");
+    lot.default.play(name);
   };
 
   const lottieLeave = async () => {
     const lot = await import("lottie-web");
-    lot.default.stop("SunIcon");
+    lot.default.stop(name);
   };
 
   return (

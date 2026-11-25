@@ -4,8 +4,9 @@ import type { Metadata, Viewport } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.scss";
-import { silka, instrumentSerif, silkscreen, jetbrainsMono } from "@/fonts";
+import { silka, instrumentSerif, silkscreen, jetbrainsMono, newsreader } from "@/fonts";
 import { ThemeProvider } from "next-themes";
+import SiteShell from "@/components/site-shell";
 
 export const metadata: Metadata = {
   title: "Fardin Abdulla - Portfolio",
@@ -34,8 +35,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#07070b" },
-    { media: "(prefers-color-scheme: light)", color: "#f3f1ec" },
+    { media: "(prefers-color-scheme: dark)", color: "#11100e" },
+    { media: "(prefers-color-scheme: light)", color: "#faf4ed" },
   ],
 };
 
@@ -47,18 +48,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${silka.className} ${silka.variable} ${instrumentSerif.variable} ${silkscreen.variable} ${jetbrainsMono.variable}`}
+        className={`${newsreader.className} ${newsreader.variable} ${silka.variable} ${instrumentSerif.variable} ${silkscreen.variable} ${jetbrainsMono.variable}`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
-          {/* Ambient background: soft drifting color + faint grid + grain */}
-          <div className="ambient" aria-hidden>
-            <div className="blob blob-1" />
-            <div className="blob blob-2" />
-            <div className="blob blob-3" />
-            <div className="ambient-grid" />
-            <div className="noise" />
-          </div>
-          <div className="relative z-[1]">{children}</div>
+          {/* sidebar (Siuuu / Projects / theme) + page content + footer */}
+          <SiteShell>{children}</SiteShell>
         </ThemeProvider>
         <SpeedInsights />
         <Analytics />

@@ -11,12 +11,16 @@ import SendmessageLightAnimation from "../../lottie/arrow/Iconly-SendmessageLigh
  * - `link`: renders an <a>; omit it when the whole card is already a link.
  * - `active`: lets the parent card play the animation while the card is hovered.
  * - `round`: the filled circle style used in the corner of cards.
+ * - `bare`: only the animated icon (no wrapper), sized with `iconClassName`; for use inside a button.
  */
 const SendmessageIcon = ({
   link,
   lottieName,
   active,
   round = false,
+  bare = false,
+  invert = false,
+  iconClassName,
   label,
   className,
 }: {
@@ -24,6 +28,10 @@ const SendmessageIcon = ({
   lottieName: string;
   active?: boolean;
   round?: boolean;
+  bare?: boolean;
+  /** use the opposite colour (for icons sitting on a filled, theme-inverted button) */
+  invert?: boolean;
+  iconClassName?: string;
   label?: string;
   className?: string;
 }) => {
@@ -41,7 +49,7 @@ const SendmessageIcon = ({
         renderer: "svg",
         loop: false,
         autoplay: false,
-        animationData: isLightMode ? SendmessageAnimation : SendmessageLightAnimation,
+        animationData: isLightMode !== invert ? SendmessageAnimation : SendmessageLightAnimation,
         container: sendMessageContainer.current,
         rendererSettings: {
           preserveAspectRatio: "xMinYMin slice",
@@ -53,7 +61,7 @@ const SendmessageIcon = ({
       cancelled = true;
       import("lottie-web").then((lot) => lot.default.destroy(lottieName));
     };
-  }, [isLightMode, lottieName]);
+  }, [isLightMode, invert, lottieName]);
 
   // play while the parent card is hovered
   useEffect(() => {
@@ -73,11 +81,14 @@ const SendmessageIcon = ({
       onMouseEnter={play}
       onMouseLeave={stop}
       className={cn(
-        "h-8 w-8 transition-opacity",
-        round ? (active ? "opacity-100" : "opacity-80") : "opacity-50 hover:opacity-100"
+        iconClassName ?? "h-8 w-8",
+        "transition-opacity",
+        bare ? "opacity-90" : round ? (active ? "opacity-100" : "opacity-80") : "opacity-50 hover:opacity-100"
       )}
     />
   );
+
+  if (bare) return LottieContainer;
 
   const wrapperClass = cn(
     "z-10 flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300",

@@ -1,14 +1,7 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
-import cn from "classnames";
+import { ReactNode } from "react";
 import styles from "./grid.module.scss";
-import {
-	WidthProvider,
-	ResponsiveGridLayout as Responsive,
-} from "react-grid-layout-next";
-import { heights, layouts } from "@/data";
-import ThemeToggle from "../theme-toggle";
 import BlurFade from "../magic-ui/blur-fade";
 import {
 	DiscordCard,
@@ -20,80 +13,35 @@ import {
 	GithubCard,
 	ChatCard,
 	ToolsCard,
-	NavBarCard,
-	Footer,
-	AiChatButton,
 } from "@/components/cards";
 
-const ResponsiveGridLayout = WidthProvider(Responsive);
-
-// Same boxes, sizes and positions as the original layout (see `layouts.all` in src/data).
-const TILES: { key: string; delay: number; node: ReactNode }[] = [
-	{ key: "bio", delay: 0.01, node: <AboutCard /> },
-	{ key: "map", delay: 0.08, node: <MapCard /> },
-	{ key: "theme-toggle", delay: 0.12, node: <ThemeToggle compact /> },
-	{ key: "resume", delay: 0.1, node: <ResumeCard /> },
-	{ key: "github", delay: 0.26, node: <GithubCard link="https://github.com/faa35" handle="@faa35" /> },
-	{ key: "linkedin", delay: 0.24, node: <IconCard title="Linkedin" link="https://www.linkedin.com/in/fardin-abdulla/" /> },
-	{ key: "codepen", delay: 0.28, node: <IconCard title="Instagram" link="https://www.instagram.com/acanto_abdulla/" /> },
-	// the old Email box now lists the tools I use (email is still in the footer and "Get in touch")
-	{ key: "email", delay: 0.3, node: <ToolsCard /> },
-	{ key: "discord", delay: 0.35, node: <DiscordCard /> },
-	{ key: "lastfm", delay: 0.4, node: <LastfmCard /> },
-	// kept empty for now (Projects / Toolbox removed to keep the page calm)
-	{ key: "chat-card", delay: 0.4, node: <ChatCard /> },
-	{ key: "chat-card-2", delay: 0.4, node: <ChatCard /> },
+// Arrangement mirrors the old site: wide intro, square tiles, two tall blank boxes.
+const TILES: { area: string; delay: number; node: ReactNode }[] = [
+	{ area: "about", delay: 0.02, node: <AboutCard /> },
+	{ area: "resume", delay: 0.06, node: <ResumeCard /> },
+	{ area: "empty1", delay: 0.1, node: <ChatCard /> },
+	{ area: "discord", delay: 0.14, node: <DiscordCard /> },
+	{ area: "map", delay: 0.18, node: <MapCard /> },
+	{ area: "empty2", delay: 0.22, node: <ChatCard /> },
+	{ area: "spotify", delay: 0.26, node: <LastfmCard /> },
+	{ area: "linkedin", delay: 0.3, node: <IconCard title="Linkedin" link="https://www.linkedin.com/in/fardin-abdulla/" /> },
+	{ area: "github", delay: 0.34, node: <GithubCard link="https://github.com/faa35" /> },
+	{ area: "tools", delay: 0.38, node: <ToolsCard /> },
+	{ area: "instagram", delay: 0.42, node: <IconCard title="Instagram" link="https://www.instagram.com/acanto_abdulla/" /> },
 ];
 
 const Grid = () => {
-	const [height, setHeight] = useState(heights.lg);
-	const [isMounted, setMounted] = useState(false);
-
-	useEffect(() => {
-		const t = setTimeout(() => setMounted(true), 500);
-		return () => clearTimeout(t);
-	}, []);
-
 	return (
-		<div className={styles.container}>
-			<NavBarCard />
-			<AiChatButton />
-
-			<ResponsiveGridLayout
-				useCSSTransforms
-				className={styles.layout}
-				layouts={layouts.all}
-				breakpoints={{
-					lg: 1199,
-					md: 799,
-					sm: 374,
-				}}
-				cols={{
-					lg: 12,
-					md: 10,
-					sm: 4,
-				}}
-				isDraggable={false}
-				rowHeight={height}
-				margin={[16, 16]}
-				onBreakpointChange={(breakpoint: any) => {
-					setHeight(heights[breakpoint]);
-				}}
-			>
+		<div className={styles.homeWrap}>
+			<main className={styles.home}>
 				{TILES.map((t) => (
-					<div
-						key={t.key}
-						className={cn(styles.itemGrab, styles.item)}
-						style={{ transitionDuration: isMounted ? "500ms" : "0ms" }}
-					>
-						<BlurFade delay={t.delay}>{t.node}</BlurFade>
+					<div key={t.area} data-area={t.area} className={styles.tile} style={{ gridArea: t.area }}>
+						<BlurFade delay={t.delay} yOffset={20} blur="6px">
+							{t.node}
+						</BlurFade>
 					</div>
 				))}
-			</ResponsiveGridLayout>
-
-			<div className="px-4">
-				<Footer />
-			</div>
+			</main>
 		</div>
 	);
 };

@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 import MoonAnimation from "../../lottie/moon/Moon.json";
 import MoonLightAnimation from "../../lottie/moon/MoonLight.json";
 
-const MoonIcon = () => {
+const MoonIcon = ({ name = "MoonIcon" }: { name?: string }) => {
   const { resolvedTheme } = useTheme();
   const isLightMode = resolvedTheme === "light";
   const moonIconContainer = useRef<HTMLDivElement | null>(null);
@@ -15,7 +15,7 @@ const MoonIcon = () => {
 
     if (!moonIconContainer.current) return;
     lot.default.loadAnimation({
-      name: "MoonIcon",
+      name,
       renderer: "svg",
       loop: false,
       autoplay: false,
@@ -29,7 +29,7 @@ const MoonIcon = () => {
 
   async function destroyLottie() {
     const lot = await import("lottie-web");
-    lot.default.destroy("MoonIcon");
+    lot.default.destroy(name);
   }
 
   useEffect(() => {
@@ -38,16 +38,16 @@ const MoonIcon = () => {
     return () => {
       destroyLottie();
     };
-  }, [isLightMode, resolvedTheme]);
+  }, [isLightMode, resolvedTheme, name]);
 
   const lottieHover = async () => {
     const lot = await import("lottie-web");
-    lot.default.play("MoonIcon");
+    lot.default.play(name);
   }
 
   const lottieLeave = async () => {
     const lot = await import("lottie-web");
-    lot.default.stop("MoonIcon");
+    lot.default.stop(name);
   }
 
   return (

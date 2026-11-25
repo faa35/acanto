@@ -8,11 +8,9 @@ import {
 	ResponsiveGridLayout as Responsive,
 } from "react-grid-layout-next";
 import { heights, layouts } from "@/data";
-import ThemeToggle from "../theme-toggle";
 import BlurFade from "../magic-ui/blur-fade";
 import {
 	// ProjectCard,
-	NavBarCard,
 	ML_NN_Card,
 	JourneyGenie_Card,
 	FriendsBook_Card,
@@ -21,8 +19,6 @@ import {
 	Hashmap_Card,
 	Search_Card,
 	Tictactoe_Card,
-	Footer,
-	AiChatButton,
 
 } from "@/components/cards";
 
@@ -40,8 +36,6 @@ const Grid = () => {
 
 	return (
 		<div className={styles.container}>
-			<NavBarCard />
-			<AiChatButton />
 			<ResponsiveGridLayout
 				useCSSTransforms
 				className={styles.layout}
@@ -90,17 +84,7 @@ const Grid = () => {
 						<JourneyGeniev2_Card />
 					</BlurFade>
 				</div>
-				<div
-					key="theme-toggle-2"
-					className={cn(styles.itemGrab, styles.item)}
-					style={{
-						transitionDuration: isMounted ? "700ms" : "0ms"
-					}}
-        >
-					<BlurFade delay={0.55}>
-						<ThemeToggle compact />
-					</BlurFade>
-				</div>
+
 
 				<div
 					key="journey-genie"
@@ -181,7 +165,6 @@ const Grid = () => {
 				</div>
 
 			</ResponsiveGridLayout>
-			<Footer />
 		</div>
 	);
 };

@@ -18,25 +18,25 @@
 
 /* ---------- design tokens ---------- */
 :root {
-  /* light theme: warm paper tones (matches the beige card drawings) */
-  --bg: #f4eee7;
-  --bg-elevated: #fdf9f5;
-  --surface: rgba(251, 246, 240, 0.86);
-  --surface-hover: rgba(252, 248, 243, 0.96);
-  --border: rgba(70, 55, 40, 0.13);
-  --border-strong: rgba(70, 55, 40, 0.22);
-  --text: #2a231c;
-  --muted: #877e74;
-  --accent: #7c3aed;
-  --accent-soft: rgba(124, 58, 237, 0.1);
-  --spotlight: rgba(124, 58, 237, 0.07);
+  /* light theme: warm paper (matches the old site) */
+  --bg: #faf4ed;
+  --bg-elevated: #f1ebe3;
+  --surface: #faf4ed;
+  --surface-hover: #f7f1e9;
+  --border: #d4cdc5;
+  --border-strong: #bdb5ab;
+  --text: #332b21;
+  --muted: #867e74;
+  --accent: #7a6a58;
+  --accent-soft: rgba(122, 106, 88, 0.12);
+  --spotlight: transparent;
   --grid-line-color: rgba(70, 55, 40, 0.05);
-  --widgetPlaceholder: #ede6df;
-  --footer-text: #2a231c;
+  --widgetPlaceholder: #ede7df;
+  --footer-text: #332b21;
   /* solid colour that matches the card surface (avatar rings etc.) */
-  --card-solid: #f9f4ee;
-  --panel: rgba(70, 55, 40, 0.05);
-  --pill: rgba(70, 55, 40, 0.08);
+  --card-solid: #faf4ed;
+  --panel: #ede7df;
+  --pill: #e6dfd6;
   --logo: #a19a91;
   /* round corner buttons + brand badges */
   --chip: #d9d2ca;
@@ -51,43 +51,44 @@
   --fig-dark: #524a40;
   --text-soft: #4d443b;
   --code-faint: #d4cdc5;
-  /* calms down photos / maps / banners so they sit with the beige cards */
+  /* calms down photos / maps / banners so they sit with the cards */
   --media-filter: saturate(0.4) sepia(0.28) contrast(0.88) brightness(1.03);
   --media-filter-hover: saturate(0.9) sepia(0.05);
   --discord-time: #2f8a4e;
 }
 
 .dark {
-  --bg: #07070b;
-  --bg-elevated: #101017;
-  --surface: rgba(18, 18, 26, 0.66);
-  --surface-hover: rgba(22, 22, 32, 0.82);
-  --border: rgba(255, 255, 255, 0.07);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --text: #f1f0f5;
-  --muted: #8d8b99;
-  --accent: #a78bfa;
-  --accent-soft: rgba(167, 139, 250, 0.12);
-  --spotlight: rgba(167, 139, 250, 0.1);
-  --grid-line-color: rgba(255, 255, 255, 0.045);
-  --widgetPlaceholder: #1b1b25;
-  --footer-text: #e0dfe3;
-  --card-solid: #0e0e15;
-  --panel: rgba(255, 255, 255, 0.04);
-  --pill: rgba(255, 255, 255, 0.07);
-  --logo: #5f5b6b;
-  --chip: #291e40;
-  --chip-fg: #ffffff;
+  /* dark theme: warm charcoal + cream (matches the old site) */
+  --bg: #11100e;
+  --bg-elevated: #1d1b19;
+  --surface: #11100e;
+  --surface-hover: #151412;
+  --border: #34312c;
+  --border-strong: #4a4640;
+  --text: #f3e6d2;
+  --muted: #988d7e;
+  --accent: #d8c3a0;
+  --accent-soft: rgba(216, 195, 160, 0.12);
+  --spotlight: transparent;
+  --grid-line-color: rgba(255, 240, 220, 0.04);
+  --widgetPlaceholder: #1d1b19;
+  --footer-text: #f3e6d2;
+  --card-solid: #11100e;
+  --panel: #1d1b19;
+  --pill: #26231f;
+  --logo: #eee0c9;
+  --chip: #2a2622;
+  --chip-fg: #f3e6d2;
   /* line-art figures */
-  --fig-stroke: #6f6b7a;
-  --fig-fill: #111118;
-  --fig-body: #23222d;
-  --fig-ink: #e6e3ec;
-  --fig-prop: #5d5967;
-  --fig-prop-2: #8e8a99;
-  --fig-dark: #c9c5d3;
-  --text-soft: #dbdee1;
-  --code-faint: #34323e;
+  --fig-stroke: #6f675c;
+  --fig-fill: #11100e;
+  --fig-body: #22201d;
+  --fig-ink: #f3e6d2;
+  --fig-prop: #5a544c;
+  --fig-prop-2: #8c8374;
+  --fig-dark: #e6d8c2;
+  --text-soft: #d9ccb8;
+  --code-faint: #34312c;
   --media-filter: saturate(0.45) brightness(0.62) contrast(0.92);
   --media-filter-hover: saturate(0.9) brightness(0.9);
   --discord-time: #8ec696;
@@ -143,95 +144,6 @@ a {
 
 .rfm-child {
   display: flex;
-}
-
-/* ---------- ambient background ---------- */
-.ambient {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-
-  .ambient-grid {
-    position: absolute;
-    inset: 0;
-    background-image: linear-gradient(var(--grid-line-color) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
-  }
-
-  .blob {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(90px);
-    opacity: 0.55;
-    will-change: transform;
-  }
-
-  .blob-1 {
-    width: 42vw;
-    height: 42vw;
-    top: -14vw;
-    left: -8vw;
-    background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
-    animation: drift-1 22s ease-in-out infinite alternate;
-  }
-
-  .blob-2 {
-    width: 38vw;
-    height: 38vw;
-    top: 10vh;
-    right: -10vw;
-    background: radial-gradient(circle, #0ea5e9 0%, transparent 70%);
-    opacity: 0.35;
-    animation: drift-2 26s ease-in-out infinite alternate;
-  }
-
-  .blob-3 {
-    width: 36vw;
-    height: 36vw;
-    bottom: -16vw;
-    left: 30vw;
-    background: radial-gradient(circle, #db2777 0%, transparent 70%);
-    opacity: 0.22;
-    animation: drift-3 30s ease-in-out infinite alternate;
-  }
-
-  .noise {
-    position: absolute;
-    inset: -50%;
-    opacity: 0.035;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  }
-}
-
-:root:not(.dark) .ambient .blob {
-  opacity: 0.18;
-}
-
-@keyframes drift-1 {
-  to {
-    transform: translate3d(12vw, 8vh, 0) scale(1.1);
-  }
-}
-@keyframes drift-2 {
-  to {
-    transform: translate3d(-10vw, 14vh, 0) scale(0.9);
-  }
-}
-@keyframes drift-3 {
-  to {
-    transform: translate3d(-14vw, -10vh, 0) scale(1.15);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ambient .blob {
-    animation: none;
-  }
 }
 
 /* ---------- react-grid-layout (projects page) ---------- */
